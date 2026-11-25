@@ -1,0 +1,77 @@
+/* Things Tailwind utilities don't cover cleanly */
+
+.money { font-variant-numeric: tabular-nums; }
+
+/* Shared input look */
+.field {
+  display: block;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e3ddd0;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.875rem;
+  color: #1f1d1a;
+  font-weight: 400;
+}
+.field:focus {
+  outline: 2px solid #0f6b5c;
+  outline-offset: 1px;
+  border-color: #0f6b5c;
+}
+.field.invalid { border-color: #b4392b; }
+
+.err {
+  display: block;
+  min-height: 1rem;
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #b4392b;
+}
+
+button:focus-visible {
+  outline: 2px solid #0f6b5c;
+  outline-offset: 2px;
+}
+
+/* Modal */
+dialog::backdrop { background: rgba(31, 29, 26, 0.45); }
+dialog[open] { animation: pop 0.15s ease-out; margin: auto; }
+@keyframes pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translate(-50%, 150%);
+  background: #1f1d1a;
+  color: #fffdf8;
+  font-size: 0.875rem;
+  padding: 0.7rem 1rem;
+  border-radius: 0.6rem;
+  transition: transform 0.2s ease, visibility 0.2s;
+  z-index: 50;
+  white-space: nowrap;
+  visibility: hidden; /* keeps the hidden Undo button out of the tab order */
+}
+.toast.show { transform: translate(-50%, 0); visibility: visible; }
+
+/* Row action buttons */
+.row-btn {
+  font-size: 0.75rem;
+  color: #6f6a60;
+  padding: 0.25rem 0.4rem;
+  border-radius: 0.35rem;
+}
+.row-btn:hover { background: #f6f3ec; color: #1f1d1a; }
+.row-btn.confirm { background: #b4392b; color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  dialog[open] { animation: none; }
+  .toast { transition: none; }
+}

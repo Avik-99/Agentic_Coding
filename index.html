@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Figtree', 'system-ui', 'sans-serif'] },
+          colors: {
+            paper: '#f6f3ec',
+            card: '#fffdf8',
+            ink: '#1f1d1a',
+            mute: '#6f6a60',
+            line: '#e3ddd0',
+            accent: { DEFAULT: '#0f6b5c', dark: '#0b5448', soft: '#e1efeb' },
+            danger: '#b4392b'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-paper text-ink font-sans antialiased">
+
+  <header class="border-b border-line">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between gap-4">
+      <div>
+        <h1 class="text-xl font-bold tracking-tight">Expense Tracker</h1>
+        <p class="text-sm text-mute"><span id="monthLabel"></span>: <span id="monthTotal" class="money font-semibold text-ink"></span></p>
+      </div>
+      <button id="addBtn" class="bg-accent hover:bg-accent-dark text-white font-semibold text-sm px-4 py-2.5 rounded-lg transition-colors">
+        + Add expense
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+
+    <!-- Summary -->
+    <section aria-label="Summary" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="bg-card border border-line rounded-xl p-4">
+        <p class="text-xs uppercase tracking-wide text-mute">Total spent</p>
+        <p id="sumTotal" class="money text-2xl font-bold mt-1">৳0.00</p>
+        <p id="sumCount" class="text-xs text-mute mt-1"></p>
+      </div>
+      <div class="bg-card border border-line rounded-xl p-4">
+        <p class="text-xs uppercase tracking-wide text-mute">Average per category</p>
+        <p id="sumAvg" class="money text-2xl font-bold mt-1">৳0.00</p>
+        <p id="sumAvgNote" class="text-xs text-mute mt-1"></p>
+      </div>
+      <div class="bg-card border border-line rounded-xl p-4">
+        <p class="text-xs uppercase tracking-wide text-mute">Top category</p>
+        <p id="sumTop" class="text-2xl font-bold mt-1">None</p>
+        <p id="sumTopNote" class="money text-xs text-mute mt-1"></p>
+      </div>
+    </section>
+
+    <!-- Charts -->
+    <section aria-label="Charts" class="grid grid-cols-1 md:grid-cols-5 gap-3">
+      <div class="md:col-span-2 bg-card border border-line rounded-xl p-4">
+        <h2 class="text-sm font-semibold mb-3">By category</h2>
+        <div class="relative h-56">
+          <canvas id="pieChart" aria-label="Spending by category"></canvas>
+          <p id="pieEmpty" class="hidden absolute inset-0 grid place-items-center text-sm text-mute">No data to chart</p>
+        </div>
+      </div>
+      <div class="md:col-span-3 bg-card border border-line rounded-xl p-4">
+        <h2 class="text-sm font-semibold mb-3">Spending over time <span id="barMode" class="font-normal text-mute"></span></h2>
+        <div class="relative h-56">
+          <canvas id="barChart" aria-label="Spending over time"></canvas>
+          <p id="barEmpty" class="hidden absolute inset-0 grid place-items-center text-sm text-mute">No data to chart</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section aria-label="Filters" class="bg-card border border-line rounded-xl p-4">
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-3 items-end">
+        <label class="col-span-2 md:col-span-1 text-xs text-mute">Category
+          <select id="fCategory" class="field mt-1"></select>
+        </label>
+        <label class="text-xs text-mute">From
+          <input id="fFrom" type="date" class="field mt-1">
+        </label>
+        <label class="text-xs text-mute">To
+          <input id="fTo" type="date" class="field mt-1">
+        </label>
+        <label class="text-xs text-mute">Min ৳
+          <input id="fMin" type="number" min="0" step="any" placeholder="0" class="field mt-1">
+        </label>
+        <label class="text-xs text-mute">Max ৳
+          <input id="fMax" type="number" min="0" step="any" placeholder="Any" class="field mt-1">
+        </label>
+        <button id="clearFilters" class="col-span-2 md:col-span-1 text-sm font-medium border border-line rounded-lg px-3 py-2 hover:bg-paper transition-colors">Clear filters</button>
+      </div>
+    </section>
+
+    <!-- List -->
+    <section aria-label="Expenses">
+      <div class="flex items-baseline justify-between mb-2">
+        <h2 class="text-sm font-semibold">Expenses</h2>
+        <button id="clearAll" class="text-xs text-mute hover:text-danger underline underline-offset-2">Clear all data</button>
+      </div>
+      <ul id="list" class="bg-card border border-line rounded-xl divide-y divide-line overflow-hidden"></ul>
+      <p id="empty" class="hidden bg-card border border-line rounded-xl p-8 text-center text-sm text-mute"></p>
+    </section>
+  </main>
+
+  <!-- Add / edit modal -->
+  <dialog id="modal" class="rounded-2xl bg-card text-ink p-0 w-[calc(100%-2rem)] max-w-md border border-line shadow-xl">
+    <form id="form" method="dialog" novalidate class="p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 id="modalTitle" class="text-lg font-bold">Add expense</h2>
+        <button type="button" id="closeModal" class="text-mute hover:text-ink text-2xl leading-none" aria-label="Close">&times;</button>
+      </div>
+
+      <label class="block text-sm font-medium">Date
+        <input id="date" type="date" required class="field mt-1">
+        <span class="err" data-for="date"></span>
+      </label>
+
+      <label class="block text-sm font-medium">Category
+        <select id="category" required class="field mt-1"></select>
+        <span class="err" data-for="category"></span>
+      </label>
+
+      <label class="block text-sm font-medium">Amount (৳)
+        <input id="amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00" required class="field mt-1">
+        <span class="err" data-for="amount"></span>
+      </label>
+
+      <label class="block text-sm font-medium">Description
+        <input id="description" type="text" maxlength="80" placeholder="What was it for?" class="field mt-1">
+      </label>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" id="cancelBtn" class="text-sm font-medium border border-line rounded-lg px-4 py-2 hover:bg-paper">Cancel</button>
+        <button type="submit" id="saveBtn" class="text-sm font-semibold bg-accent hover:bg-accent-dark text-white rounded-lg px-4 py-2">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite">
+    <span id="toastMsg"></span>
+    <button id="toastUndo" class="font-semibold underline underline-offset-2 ml-3">Undo</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
