@@ -162,7 +162,7 @@
   // ---------- Charts ----------
   let pie, bar;
   Chart.defaults.font.family = 'Figtree, system-ui, sans-serif';
-  Chart.defaults.color = '#6f6a60';
+  Chart.defaults.color = '#9aabc7';
 
   function renderCharts(items) {
     const byCat = {};
@@ -181,7 +181,7 @@
       datasets: [{
         data: catLabels.map((c) => byCat[c]),
         backgroundColor: catLabels.map((c) => CATEGORIES[c]),
-        borderColor: '#fffdf8',
+        borderColor: '#12264a',
         borderWidth: 2
       }]
     };
@@ -226,7 +226,7 @@
 
     const barData = {
       labels,
-      datasets: [{ data: keys.map((k) => buckets[k]), backgroundColor: '#0f6b5c', borderRadius: 4, maxBarThickness: 36 }]
+      datasets: [{ data: keys.map((k) => buckets[k]), backgroundColor: '#2fa894', borderRadius: 4, maxBarThickness: 36 }]
     };
     if (!bar) {
       bar = new Chart($('barChart'), {
@@ -240,7 +240,7 @@
           },
           scales: {
             x: { grid: { display: false } },
-            y: { beginAtZero: true, grid: { color: '#ece6d9' }, ticks: { callback: (v) => CURRENCY + v.toLocaleString('en-US') } }
+            y: { beginAtZero: true, grid: { color: '#1f3760' }, ticks: { callback: (v) => CURRENCY + v.toLocaleString('en-US') } }
           }
         }
       });

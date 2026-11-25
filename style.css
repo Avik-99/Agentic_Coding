@@ -1,25 +1,28 @@
 /* Things Tailwind utilities don't cover cleanly */
 
+/* Dark theme: native date pickers, dropdowns and scrollbars render dark */
+:root { color-scheme: dark; }
+
 .money { font-variant-numeric: tabular-nums; }
 
 /* Shared input look */
 .field {
   display: block;
   width: 100%;
-  background: #fff;
-  border: 1px solid #e3ddd0;
+  background: #0e1f3d;
+  border: 1px solid #25406b;
   border-radius: 0.5rem;
   padding: 0.5rem 0.65rem;
   font-size: 0.875rem;
-  color: #1f1d1a;
+  color: #e6edf7;
   font-weight: 400;
 }
 .field:focus {
-  outline: 2px solid #0f6b5c;
+  outline: 2px solid #3cc4ae;
   outline-offset: 1px;
-  border-color: #0f6b5c;
+  border-color: #3cc4ae;
 }
-.field.invalid { border-color: #b4392b; }
+.field.invalid { border-color: #f07a6a; }
 
 .err {
   display: block;
@@ -27,16 +30,16 @@
   margin-top: 0.2rem;
   font-size: 0.75rem;
   font-weight: 400;
-  color: #b4392b;
+  color: #f07a6a;
 }
 
 button:focus-visible {
-  outline: 2px solid #0f6b5c;
+  outline: 2px solid #3cc4ae;
   outline-offset: 2px;
 }
 
 /* Modal */
-dialog::backdrop { background: rgba(31, 29, 26, 0.45); }
+dialog::backdrop { background: rgba(3, 8, 20, 0.65); }
 dialog[open] { animation: pop 0.15s ease-out; margin: auto; }
 @keyframes pop {
   from { opacity: 0; transform: translateY(8px) scale(0.98); }
@@ -49,8 +52,8 @@ dialog[open] { animation: pop 0.15s ease-out; margin: auto; }
   left: 50%;
   bottom: 1.5rem;
   transform: translate(-50%, 150%);
-  background: #1f1d1a;
-  color: #fffdf8;
+  background: #e6edf7;
+  color: #0b1a33;
   font-size: 0.875rem;
   padding: 0.7rem 1rem;
   border-radius: 0.6rem;
@@ -64,12 +67,12 @@ dialog[open] { animation: pop 0.15s ease-out; margin: auto; }
 /* Row action buttons */
 .row-btn {
   font-size: 0.75rem;
-  color: #6f6a60;
+  color: #9aabc7;
   padding: 0.25rem 0.4rem;
   border-radius: 0.35rem;
 }
-.row-btn:hover { background: #f6f3ec; color: #1f1d1a; }
-.row-btn.confirm { background: #b4392b; color: #fff; }
+.row-btn:hover { background: #0b1a33; color: #e6edf7; }
+.row-btn.confirm { background: #c0392b; color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
   dialog[open] { animation: none; }
