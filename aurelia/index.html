@@ -1,0 +1,1569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURELIA — Fine Dining &amp; Contemporary Bistro, London</title>
+<meta name="description" content="AURELIA: a seasonal seven-course Dining Room and a contemporary all-day Bistro under one roof in Clerkenwell, London. Reserve a table online.">
+<meta name="theme-color" content="#15120f">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2315120f'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23d4b07a'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root{
+  --ink:#15120f; --ink-2:#1f1a16;
+  --paper:#fbf8f3; --cream:#f6f1e9; --stone:#ece4d7;
+  --gold:#b48a4f; --gold-2:#d4b07a; --gold-ink:#7d5f33;
+  --text:#1d1915; --muted:#665d53; --muted-dark:#a99d8e;
+  --line:rgba(29,25,21,.13); --line-dark:rgba(246,241,233,.15);
+  --serif:"Cormorant Garamond","Cormorant",Garamond,"Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --wrap:1240px; --gutter:clamp(1.25rem,4vw,3rem);
+  --header-h:78px;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 8px);-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);font-size:1rem;line-height:1.65;color:var(--text);background:var(--paper);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body.modal-open{overflow:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:1rem;top:-4rem;z-index:100;background:var(--ink);color:var(--cream);padding:.75rem 1rem;text-decoration:none}
+.skip:focus{top:1rem}
+.wrap{width:min(var(--wrap),100% - 2*var(--gutter));margin-inline:auto}
+
+/* ---------- media (with graceful fallback if a photo fails) ---------- */
+.media{position:relative;overflow:hidden;background:linear-gradient(135deg,#3b3026 0%,#211b16 60%,#16120f 100%)}
+.media img{width:100%;height:100%;object-fit:cover}
+.media.is-broken img{visibility:hidden}
+.media.is-broken::after{content:"AURELIA";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);letter-spacing:.4em;color:rgba(212,176,122,.45);font-size:1.1rem}
+
+/* ---------- type ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:.9rem;margin:0;font-size:.72rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-ink)}
+.eyebrow::before{content:"";width:2rem;height:1px;background:currentColor;opacity:.6}
+.on-dark .eyebrow,.hero .eyebrow,.private .eyebrow{color:var(--gold-2)}
+.title{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5.2vw,4.2rem);line-height:1.02;letter-spacing:-.005em;margin:.45em 0 .4em}
+.title em{font-style:italic;color:var(--gold-ink)}
+.on-dark .title em,.private .title em{color:var(--gold-2)}
+.section{padding:clamp(5rem,10vw,8.5rem) 0}
+.section-head{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 4rem;align-items:end;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.section-head p{margin:0 0 .6rem;max-width:30rem;color:var(--muted)}
+.on-dark{background:var(--ink);color:var(--cream)}
+.on-dark p{color:var(--muted-dark)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1.05rem 1.7rem;border:1px solid transparent;border-radius:0;font:500 .74rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.btn .arr{transition:transform .3s var(--ease)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-gold{background:var(--gold);color:#16120e}
+.btn-gold:hover{background:var(--gold-2)}
+.btn-ghost-light{border-color:rgba(255,255,255,.55);color:#fff}
+.btn-ghost-light:hover{background:#fff;color:var(--ink)}
+.btn-dark{background:var(--ink);color:var(--cream)}
+.btn-dark:hover{background:#2b241e}
+.btn-outline{border-color:rgba(29,25,21,.35);color:var(--text);background:transparent}
+.btn-outline:hover{border-color:var(--ink);background:var(--ink);color:var(--cream)}
+.btn-sm{padding:.8rem 1.2rem;font-size:.68rem}
+.btn[disabled]{opacity:.75;cursor:progress}
+.btn.is-loading::after{content:"";width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.link-arrow{display:inline-flex;align-items:center;gap:.6rem;padding-bottom:.35rem;border-bottom:1px solid currentColor;font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;text-decoration:none}
+.link-arrow .arr{transition:transform .3s var(--ease)}
+.link-arrow:hover .arr{transform:translateX(4px)}
+.text-link{background:none;border:0;padding:0;color:var(--gold-ink);font-weight:500;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+/* ---------- live status ---------- */
+.status{display:inline-flex;align-items:center;gap:.55rem;white-space:nowrap}
+.dot{flex:none;width:7px;height:7px;border-radius:50%;background:#9a8f84}
+.is-open .dot{background:#5fae7a;animation:pulse 2.4s infinite}
+.is-soon .dot{background:#e0a84a}
+.is-closed .dot{background:#c46a5a}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(95,174,122,.55)}70%{box-shadow:0 0 0 8px rgba(95,174,122,0)}100%{box-shadow:0 0 0 0 rgba(95,174,122,0)}}
+.status-badge{padding:.42rem .85rem;border:1px solid var(--line);border-radius:999px;font-size:.78rem;background:#fff}
+
+/* ---------- header ---------- */
+.site-header{position:fixed;inset:0 0 auto;z-index:50;color:#fff;transition:background .4s,color .4s,box-shadow .4s}
+.site-header.is-solid{background:rgba(251,248,243,.95);color:var(--text);box-shadow:0 1px 0 var(--line);-webkit-backdrop-filter:saturate(1.2) blur(10px);backdrop-filter:saturate(1.2) blur(10px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:2rem;height:var(--header-h)}
+.brand{font-family:var(--serif);font-size:1.55rem;font-weight:500;letter-spacing:.34em;text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;gap:2rem;margin:0;padding:0;list-style:none}
+.nav-links a{position:relative;padding:.4rem 0;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;opacity:.88}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav-links a:hover::after,.nav-links a.is-active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:1.4rem}
+.nav-right .status{font-size:.74rem}
+.menu-toggle{display:none;width:44px;height:44px;align-items:center;justify-content:center;background:none;border:1px solid currentColor;border-radius:50%;cursor:pointer;opacity:.85}
+.menu-toggle span,.menu-toggle span::before{display:block;width:16px;height:1px;background:currentColor;position:relative;transition:transform .3s}
+.menu-toggle span::before{content:"";position:absolute;top:5px}
+.menu-toggle span{transform:translateY(-2.5px)}
+.menu-toggle[aria-expanded="true"] span{transform:rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span::before{transform:translateY(-5px) rotate(-90deg)}
+.mobile-nav{background:var(--ink);color:var(--cream);padding:1rem var(--gutter) 2rem;border-top:1px solid var(--line-dark)}
+.mobile-nav ul{list-style:none;margin:0;padding:0}
+.mobile-nav a{display:block;padding:.75rem 0;border-bottom:1px solid var(--line-dark);font-family:var(--serif);font-size:1.7rem;text-decoration:none}
+.mobile-nav .status{margin-top:1.4rem;font-size:.85rem;color:var(--muted-dark)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;display:grid;grid-template-rows:1fr auto;min-height:100vh;min-height:100svh;color:#fff;isolation:isolate}
+.hero-media{position:absolute;inset:0;z-index:-2}
+.hero-media img{transform:scale(1.07);animation:heroZoom 16s var(--ease) forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,10,8,.62) 0%,rgba(12,10,8,.28) 45%,rgba(12,10,8,0) 70%),linear-gradient(180deg,rgba(12,10,8,.62) 0%,rgba(12,10,8,.22) 38%,rgba(12,10,8,.8) 100%)}
+.hero-inner{align-self:end;padding:calc(var(--header-h) + 4rem) 0 3.5rem}
+.display{margin:.35em 0 .3em;font-family:var(--serif);font-weight:400;font-size:clamp(3.2rem,9vw,7.6rem);line-height:.94;letter-spacing:-.012em}
+.display em{font-style:italic;color:var(--gold-2)}
+.lede{max-width:35rem;margin:0 0 2.4rem;font-size:1.08rem;color:rgba(255,255,255,.84)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem}
+.hero-foot{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:1.4rem 0 1.9rem;border-top:1px solid rgba(255,255,255,.22);font-size:.88rem}
+.hero-foot .k{display:block;margin-bottom:.3rem;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.hero-foot a{text-decoration:none}
+
+/* ---------- rooms ---------- */
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem)}
+.room:nth-child(2){margin-top:clamp(0rem,9vw,8rem)}
+.room .media{aspect-ratio:4/5}
+.room .media img{transition:transform 1.2s var(--ease)}
+.room:hover .media img{transform:scale(1.04)}
+.room-index{margin:1.6rem 0 0;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.room h3{margin:.4rem 0 .7rem;font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.2vw,2.6rem);line-height:1.05}
+.room p{margin:0;color:var(--muted);max-width:32rem}
+.facts{margin:1.6rem 0 1.8rem;padding:0;list-style:none;border-top:1px solid var(--line)}
+.facts li{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.facts li>span:first-child{color:var(--muted)}
+.facts .status{font-size:.86rem}
+
+/* ---------- tasting ---------- */
+.tasting{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2.5rem,6vw,6rem)}
+.tasting-aside{position:sticky;top:calc(var(--header-h) + 2rem);align-self:start}
+.price-row{display:flex;flex-wrap:wrap;gap:1.5rem 2.6rem;margin:2rem 0;padding:1.5rem 0;border-block:1px solid var(--line-dark)}
+.price-row b{display:block;font-family:var(--serif);font-weight:400;font-size:2.1rem;line-height:1.1;color:var(--cream)}
+.price-row span{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-dark)}
+.tasting-aside .media{aspect-ratio:16/11;margin-top:2.2rem}
+.courses{margin:0;padding:0;list-style:none}
+.courses li{display:grid;grid-template-columns:3.5rem 1fr;gap:1.5rem;padding:1.7rem 0;border-bottom:1px solid var(--line-dark)}
+.courses li:first-child{border-top:1px solid var(--line-dark)}
+.courses .num{font-family:var(--serif);font-style:italic;font-size:1.45rem;color:var(--gold-2);line-height:1.4}
+.courses h3{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.4vw,1.9rem);line-height:1.2;color:var(--cream)}
+.courses p{margin:.25rem 0 0;font-size:.95rem}
+.tasting-note{margin-top:1.8rem;font-size:.85rem}
+
+/* ---------- menu ---------- */
+.menu-toolbar{display:grid;gap:1.4rem;margin-bottom:2.8rem;padding-bottom:1.6rem;border-bottom:1px solid var(--line)}
+.tabs{display:flex;flex-wrap:wrap;gap:.2rem 2rem}
+.tab{position:relative;padding:.4rem 0;background:none;border:0;font-family:var(--serif);font-size:1.5rem;color:var(--muted);cursor:pointer;transition:color .25s}
+.tab:hover{color:var(--text)}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .35s var(--ease)}
+.tab[aria-pressed="true"]{color:var(--text)}
+.tab[aria-pressed="true"]::after{transform:scaleX(1)}
+.filters-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 1.5rem}
+.filters-left{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.4rem}
+.segmented{display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.segmented button{padding:.5rem 1rem;border:0;border-radius:999px;background:none;font-size:.78rem;letter-spacing:.04em;color:var(--muted);cursor:pointer;transition:background .25s,color .25s}
+.segmented button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .95rem;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:.78rem;color:var(--muted);cursor:pointer;transition:all .25s}
+.chip .tick{display:grid;place-items:center;width:14px;height:14px;border:1px solid currentColor;border-radius:50%}
+.chip .tick svg{width:8px;height:8px;opacity:0}
+.chip[aria-pressed="true"]{border-color:var(--gold-ink);color:var(--gold-ink);background:rgba(180,138,79,.09)}
+.chip[aria-pressed="true"] .tick{background:var(--gold-ink);color:#fff;border-color:var(--gold-ink)}
+.chip[aria-pressed="true"] .tick svg{opacity:1}
+.result-count{margin:0;font-size:.8rem;color:var(--muted)}
+.dish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:3.2rem 2rem}
+.dish{position:relative;animation:fadeUp .6s var(--ease) both;animation-delay:calc(var(--i,0) * 45ms)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.dish .media{aspect-ratio:4/3}
+.dish .media img{transition:transform .9s var(--ease)}
+.dish:hover .media img{transform:scale(1.05)}
+.qv{position:absolute;left:1rem;bottom:1rem;padding:.55rem .85rem;background:rgba(251,248,243,.95);font-size:.64rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s var(--ease)}
+.dish:hover .qv,.dish:focus-within .qv{opacity:1;transform:none}
+.dish-meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-top:1.15rem;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.dish-price{flex:none;white-space:nowrap;font-family:var(--serif);font-size:1.3rem;letter-spacing:0;text-transform:none;color:var(--text)}
+.dish-name{margin:.3rem 0 .4rem;font-family:var(--serif);font-weight:500;font-size:1.6rem;line-height:1.15}
+.dish-open{padding:0;border:0;background:none;font:inherit;text-align:left;color:inherit;cursor:pointer}
+.dish-open::after{content:"";position:absolute;inset:0;z-index:1}
+.dish-open:focus-visible{outline:none}
+.dish:has(.dish-open:focus-visible){outline:2px solid var(--gold);outline-offset:8px}
+.dish-desc{margin:0 0 .85rem;font-size:.92rem;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:0;padding:0;list-style:none}
+.tag{padding:.28rem .55rem;border:1px solid var(--line);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tag-sig{border-color:rgba(125,95,51,.55);color:var(--gold-ink)}
+.empty{padding:4rem 1.5rem;border:1px dashed rgba(29,25,21,.25);text-align:center}
+.empty h3{margin:0 0 .4rem;font-family:var(--serif);font-weight:400;font-size:1.8rem}
+.empty p{margin:0 0 1.4rem;color:var(--muted)}
+.allergen-note{margin-top:3.5rem;font-size:.82rem;color:var(--muted);max-width:44rem}
+
+/* ---------- chef ---------- */
+.chef{display:grid;grid-template-columns:5fr 6fr;gap:clamp(2.5rem,6vw,6rem);align-items:center}
+.chef .media{aspect-ratio:4/5}
+.chef blockquote{margin:1.6rem 0 2rem;font-family:var(--serif);font-style:italic;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.2}
+.chef blockquote::before{content:"“";display:block;height:.5em;font-size:2.2em;line-height:1;color:var(--gold)}
+.chef-name{margin:0;font-family:var(--serif);font-size:1.4rem}
+.chef-role{margin:.1rem 0 1.6rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.chef-bio{color:var(--muted);max-width:34rem}
+
+/* ---------- gallery ---------- */
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,clamp(180px,22vw,300px));gap:1rem}
+.gallery .g1,.gallery .g3{grid-row:span 2}
+.gallery .media img{transition:transform 1.2s var(--ease)}
+.gallery .media:hover img{transform:scale(1.04)}
+
+/* ---------- visit ---------- */
+.visit{display:grid;grid-template-columns:7fr 5fr;gap:clamp(2.5rem,5vw,5rem)}
+.hours-block+.hours-block{margin-top:3rem}
+.hours-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem 1rem;margin-bottom:.9rem}
+.hours-head h3{margin:0;font-family:var(--serif);font-weight:400;font-size:1.9rem}
+.hours-table{width:100%;border-collapse:collapse;font-size:.93rem;font-variant-numeric:tabular-nums}
+.hours-table th,.hours-table td{padding:.72rem 0;border-bottom:1px solid var(--line);font-weight:400;text-align:left;vertical-align:top}
+.hours-table td{text-align:right;color:var(--muted)}
+.hours-table tr.is-today th,.hours-table tr.is-today td{color:var(--text);font-weight:600}
+.today-tag{margin-left:.6rem;font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-ink)}
+.tz-note{margin-top:1.2rem;font-size:.8rem;color:var(--muted)}
+.location-card{align-self:start;padding:clamp(2rem,4vw,3rem);background:var(--ink);color:var(--cream)}
+.location-card h3{margin:.6rem 0 1.4rem;font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.1}
+.location-card dl{margin:0}
+.location-card dl div{padding:1rem 0;border-top:1px solid var(--line-dark)}
+.location-card dt{margin-bottom:.25rem;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2)}
+.location-card dd{margin:0;font-size:.95rem;color:#e6ddd0}
+.location-card a{text-decoration:none;border-bottom:1px solid var(--line-dark)}
+.location-card a:hover{border-color:var(--gold-2)}
+
+/* ---------- reservations ---------- */
+.reserve-section{background:var(--stone)}
+.reserve{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.reserve-intro p{color:var(--muted)}
+.policies{margin:2rem 0 0;padding:0;list-style:none}
+.policies li{display:grid;grid-template-columns:1.6rem 1fr;gap:.8rem;padding:1rem 0;border-top:1px solid rgba(29,25,21,.16);font-size:.92rem}
+.policies li:last-child{border-bottom:1px solid rgba(29,25,21,.16)}
+.policies .n{font-family:var(--serif);font-style:italic;color:var(--gold-ink);font-size:1.1rem;line-height:1.4}
+.form-card{padding:clamp(1.5rem,4vw,3rem);background:var(--paper);box-shadow:0 30px 70px -35px rgba(20,15,10,.35)}
+.form-card h3{margin:0 0 1.6rem;font-family:var(--serif);font-weight:400;font-size:2rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.full{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:.5rem;min-width:0}
+fieldset{margin:0;padding:0;border:0;min-width:0}
+.label{font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.label .opt-hint{letter-spacing:.06em;text-transform:none;font-weight:400;color:var(--muted)}
+legend.label{padding:0;margin-bottom:.5rem}
+.input{width:100%;padding:.85rem 1rem;border:1px solid rgba(29,25,21,.22);border-radius:0;background:#fff;transition:border-color .2s,box-shadow .2s}
+.input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(180,138,79,.22)}
+.input[aria-invalid="true"]{border-color:#b3483a}
+select.input{appearance:none;-webkit-appearance:none;padding-right:2.5rem;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231d1915' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 1rem center}
+textarea.input{min-height:5.5rem;resize:vertical}
+.hint{margin:0;font-size:.8rem;color:var(--muted)}
+.error{margin:0;font-size:.8rem;color:#a33b2e}
+.error:empty{display:none}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.opt{position:relative;cursor:pointer}
+.opt-box{display:block;height:100%;padding:1rem 1.1rem;border:1px solid rgba(29,25,21,.22);background:#fff;transition:border-color .2s,box-shadow .2s}
+.opt-box b{display:block;font-family:var(--serif);font-weight:500;font-size:1.35rem;line-height:1.2}
+.opt-box small{font-size:.8rem;color:var(--muted)}
+.opt input:checked+.opt-box{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.opt input:focus-visible+.opt-box,.slot input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+.slot-group+.slot-group{margin-top:.4rem}
+.slot-label{margin:.2rem 0 .5rem;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:.5rem}
+.slot{position:relative}
+.slot span{display:block;padding:.65rem 0;border:1px solid rgba(29,25,21,.22);background:#fff;font-size:.88rem;font-variant-numeric:tabular-nums;text-align:center;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.slot span:hover{border-color:var(--ink)}
+.slot input:checked+span{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.slot input:disabled+span{background:transparent;border-style:dashed;color:#a59b90;text-decoration:line-through;cursor:not-allowed}
+.slot-msg{margin:0;padding:1rem 1.1rem;border:1px dashed rgba(29,25,21,.28);background:#fff;font-size:.9rem;color:var(--muted)}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 1.5rem;margin-top:1.9rem}
+.form-foot .hint{max-width:20rem}
+.confirm:focus{outline:none}
+.check{display:grid;place-items:center;width:58px;height:58px;border:1px solid var(--gold);border-radius:50%;color:var(--gold-ink)}
+.check path{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .7s .15s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.confirm .eyebrow{margin-top:1.6rem}
+.confirm h3{margin:.7rem 0 0;font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3vw,2.3rem);line-height:1.15}
+.confirm dl{display:grid;grid-template-columns:auto 1fr;gap:.7rem 2rem;margin:1.8rem 0;padding:1.5rem 0;border-block:1px solid var(--line)}
+.confirm dt{align-self:center;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.confirm dd{margin:0;font-family:var(--serif);font-size:1.3rem;line-height:1.3}
+.confirm dd.ref{font-family:var(--sans);font-size:.98rem;font-weight:600;letter-spacing:.14em}
+.confirm-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+
+/* ---------- private dining ---------- */
+.private{position:relative;padding:clamp(6rem,14vw,11rem) 0;color:#fff;text-align:center;isolation:isolate}
+.private>.media{position:absolute;inset:0;z-index:-2}
+.private::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(12,10,8,.64)}
+.private .eyebrow::after{content:"";width:2rem;height:1px;background:currentColor;opacity:.6}
+.private p{max-width:38rem;margin:0 auto 2.2rem;color:rgba(255,255,255,.84)}
+
+/* ---------- footer ---------- */
+.site-footer{padding:clamp(4rem,8vw,6rem) 0 2rem;background:#0f0d0b;color:var(--cream)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.1fr .8fr 1.5fr;gap:2.5rem}
+.footer-grid h4{margin:0 0 1.2rem;font-size:.68rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2)}
+.footer-grid ul{display:grid;gap:.6rem;margin:0;padding:0;list-style:none;font-size:.9rem;color:var(--muted-dark)}
+.footer-grid a{color:var(--muted-dark);text-decoration:none;transition:color .2s}
+.footer-grid a:hover{color:var(--cream)}
+.footer-brand .brand{font-size:1.9rem}
+.footer-brand p{max-width:20rem;margin:1rem 0 1.5rem;font-size:.9rem;color:var(--muted-dark)}
+.socials{display:flex;gap:.6rem}
+.socials a{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line-dark);border-radius:50%}
+.socials a:hover{border-color:var(--gold-2)}
+.socials svg{width:16px;height:16px}
+.footer-hours li span{display:block;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:#7f7469}
+.newsletter p{margin:0 0 1.2rem;font-size:.9rem;color:var(--muted-dark)}
+.nl-form{display:flex;align-items:center;border-bottom:1px solid rgba(246,241,233,.35)}
+.nl-form input{flex:1;min-width:0;padding:.85rem 0;border:0;background:none;color:var(--cream)}
+.nl-form input::placeholder{color:#8a7f73}
+.nl-form input:focus{outline:none}
+.nl-form:focus-within{border-color:var(--gold-2)}
+.nl-form button{padding:.85rem 0 .85rem 1rem;border:0;background:none;font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-2);cursor:pointer}
+.nl-msg{margin:.8rem 0 0;font-size:.82rem;color:var(--muted-dark)}
+.nl-msg.is-error{color:#e09486}
+.footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;margin-top:4.5rem;padding-top:1.6rem;border-top:1px solid var(--line-dark);font-size:.78rem;color:#8a7f73}
+.footer-bottom ul{display:flex;flex-wrap:wrap;gap:1.5rem;margin:0;padding:0;list-style:none}
+.footer-bottom a{text-decoration:none}
+.footer-bottom a:hover{color:var(--cream)}
+
+/* ---------- quick-view modal ---------- */
+.modal{width:min(1000px,calc(100% - 2rem));max-width:none;max-height:calc(100vh - 2rem);max-height:calc(100dvh - 2rem);padding:0;border:0;overflow:hidden;background:var(--paper);color:var(--text);box-shadow:0 40px 90px -20px rgba(0,0,0,.55)}
+.modal[open]{animation:modalIn .45s var(--ease)}
+@keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.modal::backdrop{background:rgba(12,10,8,.72);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.modal-grid{display:grid;grid-template-columns:1.05fr 1fr;height:min(620px,calc(100dvh - 2rem))}
+.modal-media{height:100%}
+.modal-media img{transition:opacity .35s}
+.modal-media img.is-swapping{opacity:0}
+.modal-body{display:flex;flex-direction:column;padding:clamp(1.75rem,4vw,3rem);overflow:auto}
+.modal-close{position:absolute;top:1rem;right:1rem;z-index:2;display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:var(--paper);cursor:pointer;transition:transform .3s var(--ease)}
+.modal-close:hover{transform:rotate(90deg)}
+.modal-title{margin:.8rem 0 .3rem;padding-right:2.5rem;font-family:var(--serif);font-weight:400;font-size:clamp(2rem,3.5vw,2.8rem);line-height:1.05}
+.modal-price{margin:0 0 1.2rem;font-family:var(--serif);font-size:1.55rem;color:var(--gold-ink)}
+.modal-long{margin:0 0 1.2rem;color:var(--muted)}
+.modal-facts{display:grid;gap:.85rem;margin:1.5rem 0;padding:1.4rem 0;border-block:1px solid var(--line)}
+.modal-facts div{display:grid;grid-template-columns:6.5rem 1fr;gap:1rem}
+.modal-facts dt{padding-top:.15rem;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.modal-facts dd{margin:0;font-size:.92rem}
+.modal-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-top:auto;padding-top:.4rem}
+.modal-nav{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.modal-nav button{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:none;cursor:pointer}
+.modal-nav button:hover{border-color:var(--ink)}
+.modal-nav button:disabled{opacity:.35;cursor:default}
+
+/* ---------- reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .reveal.is-in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .nav-links{display:none}
+  .menu-toggle{display:inline-flex}
+  .footer-grid{grid-template-columns:repeat(4,1fr)}
+  .footer-brand{grid-column:1/-1}
+}
+@media (max-width:900px){
+  .section-head,.rooms,.tasting,.chef,.visit,.reserve{grid-template-columns:1fr}
+  .room:nth-child(2){margin-top:0}
+  .tasting-aside{position:static}
+  .chef .media{aspect-ratio:4/3}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .newsletter{grid-column:1/-1}
+}
+@media (max-width:760px){
+  .modal-grid{grid-template-columns:1fr;height:auto;max-height:calc(100dvh - 2rem);overflow:auto}
+  .modal-media{height:auto;aspect-ratio:16/10}
+  .modal-body{overflow:visible}
+}
+@media (max-width:640px){
+  .nav-right>.status,.nav-right>.btn{display:none}
+  .hero-foot{grid-template-columns:1fr;gap:.9rem}
+  .form-grid,.opts{grid-template-columns:1fr}
+  .form-foot .btn{width:100%}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:170px}
+  .gallery .g1{grid-column:1/-1;grid-row:auto}
+  .gallery .g3{grid-row:auto}
+  .footer-grid{grid-template-columns:1fr}
+  .tabs{gap:.2rem 1.3rem}
+  .tab{font-size:1.3rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .js .reveal{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="AURELIA, back to top">AURELIA</a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#tasting">Tasting</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#chef">Kitchen</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#private">Private dining</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <span class="status" data-status="global"><span class="dot" aria-hidden="true"></span><span class="label">Checking hours…</span></span>
+      <a class="btn btn-gold btn-sm" href="#reserve">Reserve</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav"><span></span><span class="sr-only">Menu</span></button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <ul>
+      <li><a href="#rooms">Rooms</a></li>
+      <li><a href="#tasting">Tasting menu</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#chef">Kitchen</a></li>
+      <li><a href="#visit">Visit</a></li>
+      <li><a href="#private">Private dining</a></li>
+      <li><a href="#reserve">Reserve a table</a></li>
+    </ul>
+    <span class="status" data-status="global"><span class="dot" aria-hidden="true"></span><span class="label">Checking hours…</span></span>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-media media">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=80" alt="" fetchpriority="high">
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Fine dining · Contemporary bistro · Clerkenwell</p>
+    <h1 class="display" id="hero-title">A table set<br><em>for the season.</em></h1>
+    <p class="lede">Two rooms under one roof. A seven-course Dining Room menu that follows the British seasons, and a bistro serving long lunches, easy dinners and weekend brunch.</p>
+    <div class="hero-cta">
+      <a class="btn btn-gold" href="#reserve">Reserve a table <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost-light" href="#menu">Explore the menu</a>
+    </div>
+  </div>
+  <div class="wrap hero-foot">
+    <div><span class="k">Find us</span>14 Marlowe Row, Clerkenwell, London</div>
+    <div><span class="k">Today</span><span class="status" data-status="global"><span class="dot" aria-hidden="true"></span><span class="label">Checking hours…</span></span></div>
+    <div><span class="k">Reservations</span><a href="tel:+442079460321">+44 20 7946 0321</a></div>
+  </div>
+</section>
+
+<!-- ================= ROOMS ================= -->
+<section class="section" id="rooms" aria-labelledby="rooms-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">Two rooms, one kitchen</p>
+        <h2 class="title" id="rooms-title">Ceremony when you want it, <em>ease</em> when you don't.</h2>
+      </div>
+      <p>The same kitchen and the same farms supply both rooms. Choose a slow, considered evening in the Dining Room, or drop into the Bistro for something simpler that is still made with care.</p>
+    </div>
+    <div class="rooms">
+      <article class="room reveal">
+        <div class="media"><img loading="lazy" src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1100&q=80" alt="The Dining Room, tables laid with white linen"></div>
+        <p class="room-index">01 — Fine dining</p>
+        <h3>The Dining Room</h3>
+        <p>Twenty-four covers, linen and candlelight. Each evening we serve one seven-course tasting menu that changes as produce comes into and goes out of season.</p>
+        <ul class="facts">
+          <li><span>Service</span><span>Tuesday – Saturday, dinner</span></li>
+          <li><span>Menu</span><span>Seven courses · £145</span></li>
+          <li><span>Right now</span><span class="status" data-status="dining"><span class="dot" aria-hidden="true"></span><span class="label">…</span></span></li>
+        </ul>
+        <a class="link-arrow" href="#reserve" data-reserve-room="dining">Reserve the Dining Room <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+      <article class="room reveal">
+        <div class="media"><img loading="lazy" src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1100&q=80" alt="The Bistro bar and dining room"></div>
+        <p class="room-index">02 — Contemporary bistro</p>
+        <h3>The Bistro</h3>
+        <p>A long zinc bar, an à la carte menu and a wine list that welcomes a single glass. Lunch and dinner on weekdays, with brunch on Saturdays and Sundays.</p>
+        <ul class="facts">
+          <li><span>Service</span><span>Daily · lunch &amp; dinner</span></li>
+          <li><span>Menu</span><span>À la carte · from £9</span></li>
+          <li><span>Right now</span><span class="status" data-status="bistro"><span class="dot" aria-hidden="true"></span><span class="label">…</span></span></li>
+        </ul>
+        <a class="link-arrow" href="#reserve" data-reserve-room="bistro">Reserve the Bistro <span class="arr" aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TASTING ================= -->
+<section class="section on-dark" id="tasting" aria-labelledby="tasting-title">
+  <div class="wrap tasting">
+    <div class="tasting-aside reveal">
+      <p class="eyebrow">The Dining Room</p>
+      <h2 class="title" id="tasting-title">The Autumn <em>tasting</em> menu.</h2>
+      <p>Seven courses built around what our growers, fishermen and foragers bring to the kitchen door each week. We can adapt the menu for vegetarian guests and most allergies when you tell us in advance.</p>
+      <div class="price-row">
+        <div><b>£145</b><span>Per guest</span></div>
+        <div><b>£95</b><span>Wine pairing</span></div>
+        <div><b>£55</b><span>Zero-proof pairing</span></div>
+      </div>
+      <a class="btn btn-gold" href="#reserve" data-reserve-room="dining">Book the tasting menu <span class="arr" aria-hidden="true">→</span></a>
+      <div class="media"><img loading="lazy" src="https://images.unsplash.com/photo-1432139509613-5c4255815697?auto=format&fit=crop&w=1100&q=80" alt="Aged beef with jus and charred broccoli, a course from the tasting menu"></div>
+    </div>
+    <div>
+      <ol class="courses reveal">
+        <li><span class="num" aria-hidden="true">i.</span><div><h3>Snacks from the pass</h3><p>Cep tartlet, smoked eel, aged Comté gougère</p></div></li>
+        <li><span class="num" aria-hidden="true">ii.</span><div><h3>Sea bream</h3><p>Yuzu kosho, pickled kohlrabi, dashi oil</p></div></li>
+        <li><span class="num" aria-hidden="true">iii.</span><div><h3>Celeriac baked in salt</h3><p>Hazelnut, brown butter, shaved black truffle</p></div></li>
+        <li><span class="num" aria-hidden="true">iv.</span><div><h3>Hand-dived scallop</h3><p>Roasted cauliflower, golden raisin, caper</p></div></li>
+        <li><span class="num" aria-hidden="true">v.</span><div><h3>Aged Hereford beef</h3><p>Bone marrow, smoked shallot, red wine</p></div></li>
+        <li><span class="num" aria-hidden="true">vi.</span><div><h3>Comice pear</h3><p>Perry granita, buttermilk, wild fennel</p></div></li>
+        <li><span class="num" aria-hidden="true">vii.</span><div><h3>Chocolate</h3><p>70% délice, salted caramel, crème fraîche sorbet</p></div></li>
+      </ol>
+      <p class="tasting-note">The menu changes with the season, so dishes may differ from those shown here. A discretionary 12.5% service charge is added to the bill.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MENU ================= -->
+<section class="section" id="menu" aria-labelledby="menu-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">À la carte &amp; bar</p>
+        <h2 class="title" id="menu-title">The <em>menu</em>.</h2>
+      </div>
+      <p>Filter by course, room or dietary need. Select any dish to see its full description, allergens and our sommelier's pairing.</p>
+    </div>
+
+    <div class="menu-toolbar">
+      <div class="tabs" role="group" aria-label="Course">
+        <button class="tab" type="button" data-cat="all" aria-pressed="true">All</button>
+        <button class="tab" type="button" data-cat="starters" aria-pressed="false">Starters</button>
+        <button class="tab" type="button" data-cat="mains" aria-pressed="false">Mains</button>
+        <button class="tab" type="button" data-cat="desserts" aria-pressed="false">Desserts</button>
+        <button class="tab" type="button" data-cat="brunch" aria-pressed="false">Brunch</button>
+        <button class="tab" type="button" data-cat="drinks" aria-pressed="false">Drinks</button>
+      </div>
+      <div class="filters-row">
+        <div class="filters-left">
+          <div class="segmented" role="group" aria-label="Room">
+            <button type="button" data-room="all" aria-pressed="true">Both rooms</button>
+            <button type="button" data-room="dining" aria-pressed="false">Dining Room</button>
+            <button type="button" data-room="bistro" aria-pressed="false">Bistro</button>
+          </div>
+          <div class="chips" role="group" aria-label="Dietary">
+            <button class="chip" type="button" data-diet="v" aria-pressed="false"><span class="tick" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>Vegetarian</button>
+            <button class="chip" type="button" data-diet="vg" aria-pressed="false"><span class="tick" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>Vegan</button>
+            <button class="chip" type="button" data-diet="gf" aria-pressed="false"><span class="tick" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>Gluten-free</button>
+          </div>
+        </div>
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="dish-grid" id="dish-grid"></div>
+    <div class="empty" id="menu-empty" hidden>
+      <h3>Nothing matches those filters</h3>
+      <p>Try removing a dietary filter or choosing another room. The kitchen can often adapt dishes on request.</p>
+      <button class="btn btn-outline" type="button" id="reset-filters">Clear filters</button>
+    </div>
+    <p class="allergen-note">Please tell your server about any allergies or intolerances before ordering. Our kitchen handles all 14 major allergens, so we cannot guarantee that any dish is completely free of traces.</p>
+  </div>
+</section>
+
+<!-- ================= CHEF ================= -->
+<section class="section on-dark" id="chef" aria-labelledby="chef-title">
+  <div class="wrap chef">
+    <div class="media reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1100&q=80" alt="The head chef at work in the Aurelia kitchen"></div>
+    <div class="reveal">
+      <p class="eyebrow">The kitchen</p>
+      <h2 class="sr-only" id="chef-title">Meet the head chef</h2>
+      <blockquote>The best ingredient is patience. We wait for the season to arrive, then cook it simply and with care.</blockquote>
+      <p class="chef-name">Ilya Moreau</p>
+      <p class="chef-role">Head Chef &amp; Founder</p>
+      <p class="chef-bio">After training in Lyon and Copenhagen, Ilya Moreau opened Aurelia in 2019 on a quiet Clerkenwell street. The kitchen works with fewer than twenty suppliers, most within a day's drive. Whole animals are butchered in-house, and the bread starter is older than the restaurant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="section" aria-labelledby="gallery-title" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">Inside Aurelia</p>
+        <h2 class="title" id="gallery-title">Rooms made for <em>lingering</em>.</h2>
+      </div>
+      <p>Warm oak, brass and soft light. The rooms are designed so that the evening can run long and a second bottle never feels like a bad idea.</p>
+    </div>
+    <div class="gallery reveal">
+      <div class="media g1"><img loading="lazy" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1300&q=80" alt="Tables set for evening service"></div>
+      <div class="media g2"><img loading="lazy" src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=800&q=80" alt="Round café tables by the window"></div>
+      <div class="media g3"><img loading="lazy" src="https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&w=800&q=80" alt="Guests sharing lunch in the Bistro"></div>
+      <div class="media g4"><img loading="lazy" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Guests raising glasses of red wine"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VISIT / HOURS ================= -->
+<section class="section" id="visit" aria-labelledby="visit-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">Opening hours</p>
+        <h2 class="title" id="visit-title">Plan your <em>visit</em>.</h2>
+      </div>
+      <p>The live status below updates automatically in London time. Walk-ins are welcome at the Bistro bar when space allows.</p>
+    </div>
+    <div class="visit">
+      <div class="reveal">
+        <div class="hours-block">
+          <div class="hours-head">
+            <h3>The Dining Room</h3>
+            <span class="status status-badge" data-status="dining"><span class="dot" aria-hidden="true"></span><span class="label">…</span></span>
+          </div>
+          <table class="hours-table"><caption class="sr-only">Dining Room opening hours</caption><tbody id="hours-dining"></tbody></table>
+        </div>
+        <div class="hours-block">
+          <div class="hours-head">
+            <h3>The Bistro</h3>
+            <span class="status status-badge" data-status="bistro"><span class="dot" aria-hidden="true"></span><span class="label">…</span></span>
+          </div>
+          <table class="hours-table"><caption class="sr-only">Bistro opening hours</caption><tbody id="hours-bistro"></tbody></table>
+        </div>
+        <p class="tz-note">All times are London time. We close on 25 and 26 December and on 1 January.</p>
+      </div>
+      <aside class="location-card reveal" aria-label="Location and contact">
+        <p class="eyebrow">Find us</p>
+        <h3>14 Marlowe Row<br>Clerkenwell, London EC1V 4PQ</h3>
+        <dl>
+          <div><dt>Getting here</dt><dd>Six minutes on foot from Farringdon station. Cycle racks on Marlowe Row.</dd></div>
+          <div><dt>Reservations</dt><dd><a href="tel:+442079460321">+44 20 7946 0321</a><br><a href="mailto:reservations@aurelia.example">reservations@aurelia.example</a></dd></div>
+          <div><dt>Dress</dt><dd>Smart casual. Come as you are to the Bistro.</dd></div>
+          <div><dt>Access</dt><dd>Step-free entrance and an accessible restroom on the ground floor.</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESERVATIONS ================= -->
+<section class="section reserve-section" id="reserve" aria-labelledby="reserve-title">
+  <div class="wrap reserve">
+    <div class="reserve-intro reveal">
+      <p class="eyebrow">Reservations</p>
+      <h2 class="title" id="reserve-title">Reserve a <em>table</em>.</h2>
+      <p>Choose a room, a date and an available time, and your table is confirmed straight away. We take bookings up to 60 days ahead.</p>
+      <ul class="policies">
+        <li><span class="n" aria-hidden="true">i.</span><span>We hold tables for 15 minutes past the booking time. Please call if you're running late.</span></li>
+        <li><span class="n" aria-hidden="true">ii.</span><span>Allow around three hours in the Dining Room and 90 minutes in the Bistro.</span></li>
+        <li><span class="n" aria-hidden="true">iii.</span><span>Dining Room cancellations made less than 48 hours ahead are charged £50 per guest.</span></li>
+        <li><span class="n" aria-hidden="true">iv.</span><span>For groups of nine or more, see <a href="#private">Private dining</a>.</span></li>
+      </ul>
+    </div>
+
+    <div class="form-card reveal">
+      <form id="reserve-form" novalidate>
+        <h3>Your booking</h3>
+        <div class="form-grid">
+          <fieldset class="full">
+            <legend class="label">Room</legend>
+            <div class="opts">
+              <label class="opt"><input class="sr-only" type="radio" name="room" value="dining" checked><span class="opt-box"><b>The Dining Room</b><small>Tasting menu · Tue–Sat dinner</small></span></label>
+              <label class="opt"><input class="sr-only" type="radio" name="room" value="bistro"><span class="opt-box"><b>The Bistro</b><small>À la carte · daily</small></span></label>
+            </div>
+            <p class="hint" id="room-note" style="margin-top:.6rem"></p>
+          </fieldset>
+
+          <div class="field">
+            <label class="label" for="f-date">Date</label>
+            <input class="input" id="f-date" name="date" type="date" required aria-describedby="err-date">
+            <p class="error" id="err-date"></p>
+          </div>
+          <div class="field">
+            <label class="label" for="f-guests">Guests</label>
+            <select class="input" id="f-guests" name="guests">
+              <option value="1">1 guest</option>
+              <option value="2" selected>2 guests</option>
+              <option value="3">3 guests</option>
+              <option value="4">4 guests</option>
+              <option value="5">5 guests</option>
+              <option value="6">6 guests</option>
+              <option value="7">7 guests</option>
+              <option value="8">8 guests</option>
+            </select>
+          </div>
+
+          <fieldset class="full" id="time-fieldset" aria-describedby="err-time">
+            <legend class="label">Time</legend>
+            <div id="slots" aria-live="polite"></div>
+            <p class="error" id="err-time" style="margin-top:.5rem"></p>
+          </fieldset>
+
+          <div class="field full">
+            <label class="label" for="f-name">Full name</label>
+            <input class="input" id="f-name" name="guestName" type="text" autocomplete="name" required aria-describedby="err-guestName">
+            <p class="error" id="err-guestName"></p>
+          </div>
+          <div class="field">
+            <label class="label" for="f-email">Email</label>
+            <input class="input" id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="err-email">
+            <p class="error" id="err-email"></p>
+          </div>
+          <div class="field">
+            <label class="label" for="f-phone">Phone</label>
+            <input class="input" id="f-phone" name="phone" type="tel" autocomplete="tel" required aria-describedby="err-phone">
+            <p class="error" id="err-phone"></p>
+          </div>
+          <div class="field full">
+            <label class="label" for="f-occasion">Occasion <span class="opt-hint">(optional)</span></label>
+            <select class="input" id="f-occasion" name="occasion">
+              <option value="">No special occasion</option>
+              <option>Birthday</option>
+              <option>Anniversary</option>
+              <option>Engagement</option>
+              <option>Business</option>
+              <option>Celebration</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label class="label" for="f-notes">Dietary requirements &amp; requests <span class="opt-hint">(optional)</span></label>
+            <textarea class="input" id="f-notes" name="notes" placeholder="Allergies, accessibility needs, a quiet table…"></textarea>
+          </div>
+        </div>
+        <div class="form-foot">
+          <p class="hint">You don't need a card to book the Bistro. You'll get a booking reference straight away.</p>
+          <button class="btn btn-dark" type="submit" id="submit-btn">Confirm reservation</button>
+        </div>
+      </form>
+
+      <div class="confirm" id="confirm" tabindex="-1" hidden>
+        <div class="check" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <p class="eyebrow">Reservation confirmed</p>
+        <h3>Thank you, <span id="c-name"></span>. We look forward to welcoming you.</h3>
+        <dl>
+          <dt>Reference</dt><dd class="ref" id="c-ref"></dd>
+          <dt>Room</dt><dd id="c-room"></dd>
+          <dt>Date</dt><dd id="c-date"></dd>
+          <dt>Time</dt><dd id="c-time"></dd>
+          <dt>Guests</dt><dd id="c-guests"></dd>
+          <dt id="c-occasion-dt">Occasion</dt><dd id="c-occasion"></dd>
+        </dl>
+        <p class="hint">Please quote your reference if you need to change or cancel. We'll call <span id="c-phone"></span> if anything changes on our side.</p>
+        <div class="confirm-actions">
+          <button class="btn btn-dark" type="button" id="add-cal">Add to calendar</button>
+          <button class="btn btn-outline" type="button" id="new-booking">Make another reservation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRIVATE DINING ================= -->
+<section class="private" id="private" aria-labelledby="private-title">
+  <div class="media"><img loading="lazy" src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=2000&q=80" alt=""></div>
+  <div class="wrap reveal">
+    <p class="eyebrow">Private dining</p>
+    <h2 class="title" id="private-title">The <em>Cellar</em> Room.</h2>
+    <p>A private room below the Dining Room for up to 18 guests, surrounded by our wine collection. We'll plan a menu for your birthday, rehearsal dinner or team evening.</p>
+    <a class="btn btn-ghost-light" href="mailto:events@aurelia.example?subject=Private%20dining%20enquiry">Enquire about the Cellar Room <span class="arr" aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">AURELIA</a>
+        <p>A seasonal Dining Room and contemporary Bistro under one roof in Clerkenwell, London.</p>
+        <div class="socials">
+          <a href="#" aria-label="Aurelia on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+          <a href="mailto:reservations@aurelia.example" aria-label="Email Aurelia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6l8.5 7 8.5-7"/></svg></a>
+          <a href="tel:+442079460321" aria-label="Call Aurelia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>14 Marlowe Row<br>Clerkenwell<br>London EC1V 4PQ</li>
+          <li><a href="tel:+442079460321">+44 20 7946 0321</a></li>
+          <li><a href="mailto:reservations@aurelia.example">reservations@aurelia.example</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="footer-hours">
+          <li><span>Dining Room</span>Tue – Sat · from 18:00</li>
+          <li><span>Bistro</span>Mon – Fri · from 12:00</li>
+          <li><span>Weekend brunch</span>Sat – Sun · from 11:00</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#rooms">Our rooms</a></li>
+          <li><a href="#tasting">Tasting menu</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#private">Private dining</a></li>
+          <li><a href="#reserve">Reservations</a></li>
+        </ul>
+      </div>
+      <div class="newsletter">
+        <h4>Letters from the kitchen</h4>
+        <p>Seasonal menus, winemaker dinners and the occasional recipe, about once a month.</p>
+        <form class="nl-form" id="nl-form" novalidate>
+          <label class="sr-only" for="nl-email">Email address</label>
+          <input id="nl-email" type="email" placeholder="Your email address" autocomplete="email">
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="nl-msg" id="nl-msg" role="status"></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> AURELIA Restaurant Ltd. All rights reserved.</span>
+      <ul>
+        <li><a href="#menu">Allergen information</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Accessibility</a></li>
+        <li><a href="#">Gift cards</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= DISH QUICK VIEW ================= -->
+<dialog class="modal" id="dish-modal" aria-labelledby="modal-title">
+  <button class="modal-close" type="button" id="modal-close" aria-label="Close dish details">
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.4"/></svg>
+  </button>
+  <div class="modal-grid">
+    <div class="modal-media media"><img id="modal-img" src="data:," alt=""></div>
+    <div class="modal-body">
+      <p class="eyebrow" id="modal-kicker"></p>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <p class="modal-price" id="modal-price"></p>
+      <p class="modal-long" id="modal-long"></p>
+      <ul class="tags" id="modal-tags"></ul>
+      <dl class="modal-facts">
+        <div><dt>Allergens</dt><dd id="modal-allergens"></dd></div>
+        <div><dt>Pairing</dt><dd id="modal-pairing"></dd></div>
+        <div><dt>Served</dt><dd id="modal-served"></dd></div>
+      </dl>
+      <div class="modal-actions">
+        <button class="btn btn-dark" type="button" id="modal-reserve">Reserve a table <span class="arr" aria-hidden="true">→</span></button>
+        <div class="modal-nav">
+          <button type="button" id="modal-prev" aria-label="Previous dish"><svg width="14" height="10" viewBox="0 0 14 10" aria-hidden="true"><path d="M13 5H1M5 1L1 5l4 4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></button>
+          <span id="modal-pos"></span>
+          <button type="button" id="modal-next" aria-label="Next dish"><svg width="14" height="10" viewBox="0 0 14 10" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     Helpers
+     ========================================================= */
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const IMG = (id, w = 1000) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Any photo that fails to load falls back to the branded gradient behind it.
+  document.addEventListener('error', (e) => {
+    const t = e.target;
+    if (t instanceof HTMLImageElement) t.closest('.media')?.classList.add('is-broken');
+  }, true);
+
+  /* =========================================================
+     Opening hours (venue time: Europe/London)
+     Keys are JS weekdays: 0 = Sunday … 6 = Saturday
+     ========================================================= */
+  const TZ = 'Europe/London';
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const ROOMS = { dining: 'The Dining Room', bistro: 'The Bistro' };
+  const SHORT = { dining: 'Dining Room', bistro: 'Bistro' };
+  const HOURS = {
+    dining: {
+      0: [], 1: [],
+      2: [['18:00', '23:00']], 3: [['18:00', '23:00']], 4: [['18:00', '23:00']],
+      5: [['18:00', '23:30']], 6: [['18:00', '23:30']]
+    },
+    bistro: {
+      0: [['11:00', '16:00']],
+      1: [['12:00', '15:00'], ['17:30', '22:30']],
+      2: [['12:00', '15:00'], ['17:30', '22:30']],
+      3: [['12:00', '15:00'], ['17:30', '22:30']],
+      4: [['12:00', '15:00'], ['17:30', '22:30']],
+      5: [['12:00', '15:00'], ['17:30', '23:00']],
+      6: [['11:00', '15:30'], ['17:30', '23:00']]
+    }
+  };
+  const LAST_SEATING = { dining: 120, bistro: 60 }; // minutes before close
+  const SLOT_STEP = 30;
+  const BOOK_AHEAD = 60;
+
+  const toMin = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+  const fmtMin = (m) => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+  const dowOf = (ymd) => new Date(ymd + 'T12:00:00Z').getUTCDay();
+  const addDays = (ymd, n) => { const d = new Date(ymd + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  const windowsFor = (room, dow) => HOURS[room][dow] || [];
+
+  const tzFormatter = new Intl.DateTimeFormat('en-GB', {
+    timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+  });
+  function venueNow() {
+    const p = {};
+    tzFormatter.formatToParts(new Date()).forEach((x) => { p[x.type] = x.value; });
+    const ymd = `${p.year}-${p.month}-${p.day}`;
+    return { ymd, dow: dowOf(ymd), mins: (Number(p.hour) % 24) * 60 + Number(p.minute) };
+  }
+  const longDate = new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  const shortDate = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
+  const fmtLong = (ymd) => longDate.format(new Date(ymd + 'T12:00:00Z'));
+  const fmtShort = (ymd) => shortDate.format(new Date(ymd + 'T12:00:00Z'));
+
+  /* ---------- live status ---------- */
+  function roomStatus(room, now) {
+    const today = windowsFor(room, now.dow);
+    for (const [s, e] of today) {
+      const S = toMin(s), E = toMin(e);
+      if (now.mins >= S && now.mins < E) {
+        const soon = E - now.mins <= 45;
+        return { state: soon ? 'soon' : 'open', close: e, closeMin: E, text: soon ? `Closing soon · ${e}` : `Open now · until ${e}` };
+      }
+    }
+    for (const [s] of today) {
+      if (toMin(s) > now.mins) return { state: 'closed', wait: toMin(s) - now.mins, next: `today at ${s}`, text: `Closed · opens at ${s}` };
+    }
+    for (let i = 1; i <= 7; i++) {
+      const d = (now.dow + i) % 7;
+      const w = windowsFor(room, d);
+      if (w.length) {
+        const when = i === 1 ? 'tomorrow' : DAYS[d];
+        return { state: 'closed', wait: i * 1440 + toMin(w[0][0]) - now.mins, next: `${when} at ${w[0][0]}`, text: `Closed · opens ${when} at ${w[0][0]}` };
+      }
+    }
+    return { state: 'closed', wait: Infinity, next: '', text: 'Closed' };
+  }
+
+  function overallStatus(now) {
+    const d = roomStatus('dining', now), b = roomStatus('bistro', now);
+    const open = [['dining', d], ['bistro', b]].filter(([, s]) => s.state !== 'closed');
+    if (open.length === 2) {
+      const later = d.closeMin >= b.closeMin ? d : b;
+      return { state: open.every(([, s]) => s.state === 'soon') ? 'soon' : 'open', text: `Open now · until ${later.close}` };
+    }
+    if (open.length === 1) {
+      const [r, s] = open[0];
+      return { state: s.state, text: s.state === 'soon' ? `${SHORT[r]} closing soon · ${s.close}` : `${SHORT[r]} open · until ${s.close}` };
+    }
+    const next = d.wait < b.wait ? d : b;
+    return { state: 'closed', text: `Closed · opens ${next.next}` };
+  }
+
+  function paint(el, s) {
+    el.classList.remove('is-open', 'is-soon', 'is-closed');
+    el.classList.add('is-' + s.state);
+    el.querySelector('.label').textContent = s.text;
+  }
+
+  function renderHours() {
+    const order = [1, 2, 3, 4, 5, 6, 0];
+    ['dining', 'bistro'].forEach((room) => {
+      $('#hours-' + room).innerHTML = order.map((d) => {
+        const w = windowsFor(room, d);
+        const times = w.length ? w.map(([s, e]) => `${s} – ${e}`).join('<br>') : 'Closed';
+        return `<tr data-dow="${d}"><th scope="row">${DAYS[d]}<span class="today-tag" hidden>Today</span></th><td>${times}</td></tr>`;
+      }).join('');
+    });
+  }
+
+  function updateStatus() {
+    const now = venueNow();
+    const all = overallStatus(now);
+    $$('[data-status="global"]').forEach((el) => paint(el, all));
+    ['dining', 'bistro'].forEach((r) => {
+      const s = roomStatus(r, now);
+      $$(`[data-status="${r}"]`).forEach((el) => paint(el, s));
+    });
+    $$('.hours-table tr').forEach((tr) => {
+      const isToday = Number(tr.dataset.dow) === now.dow;
+      tr.classList.toggle('is-today', isToday);
+      tr.querySelector('.today-tag').hidden = !isToday;
+      if (isToday) tr.setAttribute('aria-current', 'date'); else tr.removeAttribute('aria-current');
+    });
+  }
+
+  /* =========================================================
+     Menu data
+     ========================================================= */
+  const CAT_LABEL = { starters: 'Starter', mains: 'Main', desserts: 'Dessert', brunch: 'Weekend brunch', drinks: 'Drinks' };
+  const TAG_LABEL = { sig: 'Signature', v: 'Vegetarian', vg: 'Vegan', gf: 'Gluten-free' };
+  const MENU = [
+    { id: 'ceviche', name: 'Sea Bream Ceviche', cat: 'starters', rooms: ['dining'], price: '£19',
+      img: '1535399831218-d5bd36d1a6b3', alt: 'Sea bream ceviche with sweet potato and red onion on a white plate',
+      desc: 'Tiger’s milk, sweet potato, red onion, coriander.',
+      long: 'Day-boat sea bream from Cornwall, cut to order and cured for a few minutes in a bright tiger’s milk of lime, chilli and ginger. It is served with glazed sweet potato, red onion and coriander.',
+      tags: ['sig', 'gf'], allergens: 'Fish, celery', pairing: 'Chablis Premier Cru, Burgundy' },
+    { id: 'leaves', name: 'Garden Leaves & Sheep’s Feta', cat: 'starters', rooms: ['bistro'], price: '£11',
+      img: '1540189549336-e6e99c3679fe', alt: 'A salad of leaves, feta, olives and red onion',
+      desc: 'Kalamata olives, red onion, oregano dressing.',
+      long: 'Bitter and sweet leaves from our Kent grower with crumbled sheep’s feta, Kalamata olives and thinly sliced red onion, dressed at the pass with oregano and good olive oil.',
+      tags: ['v', 'gf'], allergens: 'Milk, sulphites', pairing: 'Assyrtiko, Santorini' },
+    { id: 'harvest-bowl', name: 'Harvest Bowl', cat: 'mains', rooms: ['bistro'], price: '£16',
+      img: '1512621776951-a57141f2eefd', alt: 'A bowl of roasted squash, chickpeas, avocado and leaves',
+      desc: 'Roasted squash, chickpeas, avocado, tahini.',
+      long: 'Roasted squash, spiced crispy chickpeas, avocado, pickled red cabbage and leaves, finished with a lemon and tahini dressing. Fully plant-based and generous enough for a light lunch.',
+      tags: ['vg', 'gf'], allergens: 'Sesame', pairing: 'Albariño, Rías Baixas' },
+    { id: 'farfalle', name: 'Farfalle al Pesto', cat: 'mains', rooms: ['bistro'], price: '£18',
+      img: '1473093295043-cdd812d0e601', alt: 'Farfalle pasta with basil pesto and cherry tomatoes',
+      desc: 'Basil pesto, datterini tomatoes, aged Parmesan.',
+      long: 'Pasta made by hand each morning, tossed with basil pesto pounded to order, sweet datterini tomatoes and a generous grating of 30-month Parmigiano Reggiano.',
+      tags: ['v'], allergens: 'Gluten, egg, milk, pine nuts', pairing: 'Vermentino, Liguria' },
+    { id: 'linguine', name: 'Prawn Linguine', cat: 'mains', rooms: ['bistro'], price: '£23',
+      img: '1563379926898-05f4575a45d8', alt: 'Linguine with prawns and cherry tomatoes in a pan',
+      desc: 'Chilli, garlic, cherry tomato, parsley.',
+      long: 'Sustainably sourced prawns tossed through linguine with garlic, chilli, blistered cherry tomatoes, a splash of white wine and plenty of parsley.',
+      tags: [], allergens: 'Crustaceans, gluten, egg, sulphites', pairing: 'Gavi di Gavi, Piedmont' },
+    { id: 'salmon', name: 'Roasted Scottish Salmon', cat: 'mains', rooms: ['bistro'], price: '£24',
+      img: '1467003909585-2f8a72700288', alt: 'A fillet of roasted salmon with vegetables',
+      desc: 'Crushed new potatoes, samphire, beurre blanc.',
+      long: 'Responsibly farmed salmon from the Highlands, roasted skin-side down until crisp. It comes with crushed new potatoes, buttered samphire and a classic beurre blanc.',
+      tags: ['gf'], allergens: 'Fish, milk, sulphites', pairing: 'Sancerre, Loire Valley' },
+    { id: 'beef', name: 'Aged Hereford Beef', cat: 'mains', rooms: ['dining'], price: '£48',
+      img: '1558030006-450675393462', alt: 'Slices of pink, dry-aged beef',
+      desc: 'Bone marrow, smoked shallot, red wine jus.',
+      long: 'Hereford sirloin, dry-aged on the bone for forty days, roasted over embers and rested. It is finished with roasted bone marrow, a shallot smoked over applewood and a deep red wine jus.',
+      tags: ['sig', 'gf'], allergens: 'Celery, sulphites', pairing: 'Saint-Julien, Bordeaux' },
+    { id: 'frites', name: 'Steak Frites', cat: 'mains', rooms: ['bistro'], price: '£29',
+      img: '1600891964092-4316c288032e', alt: 'Grilled steak with a pile of chips',
+      desc: 'Bavette, triple-cooked chips, Béarnaise.',
+      long: 'A bistro classic, done properly. Grass-fed bavette is grilled to your liking and served with triple-cooked chips and a Béarnaise whisked to order.',
+      tags: ['gf'], allergens: 'Egg, milk, sulphites', pairing: 'Côtes du Rhône, Rhône Valley' },
+    { id: 'ribs', name: 'Sticky Glazed Ribs', cat: 'mains', rooms: ['bistro'], price: '£24',
+      img: '1544025162-d76694265947', alt: 'A rack of glazed ribs with chips and tomatoes on a board',
+      desc: 'Slow-smoked pork ribs, house chips, tomato salad.',
+      long: 'Outdoor-reared pork ribs, smoked low and slow over oak, then lacquered with a glaze of black treacle, cider and chipotle. Served with house chips and a sharp tomato salad.',
+      tags: [], allergens: 'Mustard, celery, sulphites, soya', pairing: 'Zinfandel, Lodi' },
+    { id: 'tiramisu', name: 'Tiramisu', cat: 'desserts', rooms: ['bistro'], price: '£10',
+      img: '1571877227200-a0d98ea607e9', alt: 'A slice of tiramisu dusted with cocoa',
+      desc: 'Espresso, Marsala, mascarpone, cocoa.',
+      long: 'Savoiardi soaked in our house espresso and a little Marsala, layered with light mascarpone cream and finished with bitter cocoa.',
+      tags: ['v'], allergens: 'Gluten, egg, milk', pairing: 'Vin Santo, Tuscany' },
+    { id: 'gateau', name: 'Raspberry & Vanilla Gâteau', cat: 'desserts', rooms: ['dining'], price: '£16',
+      img: '1565958011703-44f9829ba187', alt: 'A slice of layered raspberry and vanilla cake',
+      desc: 'Génoise, vanilla mousseline, Scottish raspberries.',
+      long: 'Light génoise layered with Madagascan vanilla mousseline and the last of the season’s Scottish raspberries, finished at the table with a raspberry and rose syrup.',
+      tags: ['sig', 'v'], allergens: 'Gluten, egg, milk', pairing: 'Brachetto d’Acqui, Piedmont' },
+    { id: 'chocolate', name: 'Chocolate Fudge Cake', cat: 'desserts', rooms: ['bistro'], price: '£10',
+      img: '1578985545062-69928b1d9587', alt: 'A tall chocolate layer cake with piped ganache',
+      desc: 'Dark chocolate ganache, crème fraîche.',
+      long: 'Three layers of rich chocolate sponge sandwiched and coated with a dark chocolate ganache. It is served by the slice with a spoonful of cold crème fraîche.',
+      tags: ['v'], allergens: 'Gluten, egg, milk, soya', pairing: 'Maury, Roussillon' },
+    { id: 'panna-cotta', name: 'Vanilla Panna Cotta', cat: 'desserts', rooms: ['bistro'], price: '£9',
+      img: '1488477181946-6428a0291777', alt: 'A creamy dessert topped with fresh berries',
+      desc: 'Macerated berries, honeycomb.',
+      long: 'A barely set Madagascan vanilla panna cotta with late-season berries macerated in a little sugar and lemon, plus shards of house-made honeycomb.',
+      tags: ['gf'], allergens: 'Milk', pairing: 'Moscato d’Asti, Piedmont' },
+    { id: 'pancakes', name: 'Buttermilk Pancakes', cat: 'brunch', rooms: ['bistro'], price: '£13',
+      img: '1567620905732-2d1ec7ab7445', alt: 'A stack of pancakes with berries and syrup',
+      desc: 'Maple butter, berries, crème fraîche.',
+      long: 'A tall stack of fluffy buttermilk pancakes with whipped maple butter, fresh berries and a spoonful of crème fraîche. Add smoked streaky bacon for £4.',
+      tags: ['v'], allergens: 'Gluten, egg, milk', pairing: 'Fresh blood orange juice, or a glass of English sparkling wine',
+      served: 'Bistro · Saturday & Sunday from 11:00' },
+    { id: 'eggs', name: 'Eggs & Avocado on Sourdough', cat: 'brunch', rooms: ['bistro'], price: '£12',
+      img: '1482049016688-2d3e1b311543', alt: 'Poached eggs and avocado on toasted bread',
+      desc: 'Poached hen’s eggs, chilli, lime, seeds.',
+      long: 'Two free-range eggs, poached, on our naturally leavened sourdough with crushed avocado, Aleppo chilli, lime and toasted seeds.',
+      tags: ['v'], allergens: 'Gluten, egg, sesame', pairing: 'Aurelia Spritz',
+      served: 'Bistro · Saturday & Sunday from 11:00' },
+    { id: 'spritz', name: 'Aurelia Spritz', cat: 'drinks', rooms: ['dining', 'bistro'], price: '£13',
+      img: '1514362545857-3bc16c4c7d1b', alt: 'An amber cocktail garnished with herbs',
+      desc: 'Blood orange aperitivo, prosecco, rosemary.',
+      long: 'Our house aperitivo, made with a blood orange bitter and topped with prosecco and soda, then finished with a sprig of rosemary. Also available as a zero-proof version.',
+      tags: ['vg', 'gf'], allergens: 'Sulphites', pairing: '—' },
+    { id: 'old-fashioned', name: 'Smoked Old Fashioned', cat: 'drinks', rooms: ['dining', 'bistro'], price: '£15',
+      img: '1470337458703-46ad1756a187', alt: 'An old fashioned being poured over a large ice cube',
+      desc: 'Bourbon, demerara, aromatic bitters, oak smoke.',
+      long: 'Bourbon stirred slowly with demerara syrup and aromatic bitters, poured over a single hand-cut cube and served under a cloche of oak smoke, with a twist of orange.',
+      tags: ['vg', 'gf'], allergens: 'Sulphites', pairing: '—' },
+    { id: 'wine', name: "Sommelier's Selection", cat: 'drinks', rooms: ['dining', 'bistro'], price: 'from £9',
+      img: '1510812431401-41d2bd2722f3', alt: 'Guests raising glasses of red wine',
+      desc: 'Forty wines by the glass, poured by Coravin.',
+      long: 'Our list favours small growers working sustainably. Forty wines are poured by the glass using Coravin, so you can explore a rare bottle without committing to all of it.',
+      tags: ['vg', 'gf'], allergens: 'Sulphites', pairing: 'Ask our sommelier' }
+  ];
+
+  /* =========================================================
+     Menu filtering
+     ========================================================= */
+  const grid = $('#dish-grid');
+  const empty = $('#menu-empty');
+  const count = $('#result-count');
+  const state = { cat: 'all', room: 'all', diet: new Set() };
+
+  function matchesDiet(d, t) {
+    if (t === 'v') return d.tags.includes('v') || d.tags.includes('vg');
+    return d.tags.includes(t);
+  }
+  function visibleDishes() {
+    return MENU.filter((d) =>
+      (state.cat === 'all' || d.cat === state.cat) &&
+      (state.room === 'all' || d.rooms.includes(state.room)) &&
+      Array.from(state.diet).every((t) => matchesDiet(d, t))
+    );
+  }
+  const tagsHTML = (tags) => tags.map((t) => `<li class="tag${t === 'sig' ? ' tag-sig' : ''}">${TAG_LABEL[t]}</li>`).join('');
+  const roomsText = (rooms) => rooms.map((r) => SHORT[r]).join(' & ');
+
+  function renderMenu() {
+    const list = visibleDishes();
+    grid.innerHTML = list.map((d, i) => `
+      <article class="dish" style="--i:${i}">
+        <div class="media"><img loading="lazy" src="${IMG(d.img, 800)}" alt="${d.alt}"><span class="qv" aria-hidden="true">Quick view</span></div>
+        <div class="dish-meta"><span>${CAT_LABEL[d.cat]} · ${roomsText(d.rooms)}</span><span class="dish-price">${d.price}</span></div>
+        <h3 class="dish-name"><button class="dish-open" type="button" data-id="${d.id}" aria-haspopup="dialog">${d.name}</button></h3>
+        <p class="dish-desc">${d.desc}</p>
+        <ul class="tags" aria-label="Dietary information">${tagsHTML(d.tags)}</ul>
+      </article>`).join('');
+    empty.hidden = list.length > 0;
+    count.textContent = list.length === 1 ? 'Showing 1 dish' : `Showing ${list.length} dishes`;
+  }
+
+  function setPressed(groupSel, attr, value) {
+    $$(groupSel).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset[attr] === value)));
+  }
+  $$('[data-cat]').forEach((b) => b.addEventListener('click', () => {
+    state.cat = b.dataset.cat; setPressed('[data-cat]', 'cat', state.cat); renderMenu();
+  }));
+  $$('[data-room]').forEach((b) => b.addEventListener('click', () => {
+    state.room = b.dataset.room; setPressed('[data-room]', 'room', state.room); renderMenu();
+  }));
+  $$('[data-diet]').forEach((b) => b.addEventListener('click', () => {
+    const t = b.dataset.diet;
+    if (state.diet.has(t)) state.diet.delete(t); else state.diet.add(t);
+    b.setAttribute('aria-pressed', String(state.diet.has(t)));
+    renderMenu();
+  }));
+  $('#reset-filters').addEventListener('click', () => {
+    state.cat = 'all'; state.room = 'all'; state.diet.clear();
+    setPressed('[data-cat]', 'cat', 'all'); setPressed('[data-room]', 'room', 'all');
+    $$('[data-diet]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+    renderMenu();
+  });
+  grid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.dish-open');
+    if (btn) openDish(btn.dataset.id, btn);
+  });
+
+  /* =========================================================
+     Dish quick-view modal
+     ========================================================= */
+  const modal = $('#dish-modal');
+  const mImg = $('#modal-img');
+  let modalList = [], modalIdx = 0, lastTrigger = null;
+
+  function fillModal() {
+    const d = modalList[modalIdx];
+    const media = mImg.closest('.media');
+    media.classList.remove('is-broken');
+    mImg.classList.add('is-swapping');
+    const next = new Image();
+    next.onload = next.onerror = () => {
+      mImg.src = next.src; mImg.alt = d.alt;
+      requestAnimationFrame(() => mImg.classList.remove('is-swapping'));
+    };
+    next.src = IMG(d.img, 1200);
+    $('#modal-kicker').textContent = `${CAT_LABEL[d.cat]} · ${roomsText(d.rooms)}`;
+    $('#modal-title').textContent = d.name;
+    $('#modal-price').textContent = d.price;
+    $('#modal-long').textContent = d.long;
+    $('#modal-tags').innerHTML = tagsHTML(d.tags);
+    $('#modal-allergens').textContent = d.allergens;
+    $('#modal-pairing').textContent = d.pairing;
+    $('#modal-served').textContent = d.served || (d.rooms.length > 1 ? 'Both rooms' : ROOMS[d.rooms[0]]);
+    $('#modal-pos').textContent = `${modalIdx + 1} / ${modalList.length}`;
+    const single = modalList.length < 2;
+    $('#modal-prev').disabled = single;
+    $('#modal-next').disabled = single;
+  }
+
+  function openDish(id, trigger) {
+    modalList = visibleDishes();
+    modalIdx = modalList.findIndex((d) => d.id === id);
+    if (modalIdx < 0) { modalList = MENU.slice(); modalIdx = MENU.findIndex((d) => d.id === id); }
+    lastTrigger = trigger || null;
+    fillModal();
+    if (!modal.open) {
+      if (typeof modal.showModal === 'function') modal.showModal(); else modal.setAttribute('open', '');
+      document.body.classList.add('modal-open');
+      $('#modal-close').focus();
+    }
+  }
+  function stepModal(delta) {
+    if (modalList.length < 2) return;
+    modalIdx = (modalIdx + delta + modalList.length) % modalList.length;
+    fillModal();
+  }
+  function closeModal() { if (modal.open) modal.close ? modal.close() : modal.removeAttribute('open'); }
+
+  modal.addEventListener('close', () => {
+    document.body.classList.remove('modal-open');
+    if (lastTrigger) lastTrigger.focus({ preventScroll: true });
+  });
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  modal.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); stepModal(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stepModal(-1); }
+  });
+  $('#modal-close').addEventListener('click', closeModal);
+  $('#modal-prev').addEventListener('click', () => stepModal(-1));
+  $('#modal-next').addEventListener('click', () => stepModal(1));
+  $('#modal-reserve').addEventListener('click', () => {
+    const d = modalList[modalIdx];
+    lastTrigger = null;
+    closeModal();
+    if (d.rooms.length === 1) setRoom(d.rooms[0]);
+    goToReserve();
+  });
+
+  /* =========================================================
+     Reservations
+     ========================================================= */
+  const form = $('#reserve-form');
+  const F = form.elements;
+  const slotsBox = $('#slots');
+  const confirmEl = $('#confirm');
+  const BOOKED_KEY = 'aurelia.booked';
+  let attempted = false;
+  let lastBooking = null;
+
+  const getRoom = () => form.querySelector('input[name="room"]:checked').value;
+  const getTime = () => form.querySelector('input[name="time"]:checked:not(:disabled)')?.value || '';
+
+  function readBooked() {
+    try { return JSON.parse(localStorage.getItem(BOOKED_KEY)) || []; } catch (_) { return []; }
+  }
+  function addBooked(key) {
+    try { localStorage.setItem(BOOKED_KEY, JSON.stringify(readBooked().concat(key).slice(-60))); } catch (_) { /* storage unavailable */ }
+  }
+
+  // Deterministic "availability" so the same date shows the same full slots.
+  function hash(str) {
+    let h = 2166136261 >>> 0;
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return h;
+  }
+
+  function slotGroups(room, ymd, guests) {
+    const now = venueNow();
+    const dow = dowOf(ymd);
+    const taken = new Set(readBooked());
+    return windowsFor(room, dow).map(([s, e]) => {
+      const S = toMin(s), last = toMin(e) - LAST_SEATING[room];
+      const slots = [];
+      for (let m = S; m <= last; m += SLOT_STEP) {
+        if (ymd < now.ymd || (ymd === now.ymd && m < now.mins + 30)) continue;
+        const time = fmtMin(m);
+        const key = `${room}|${ymd}|${time}`;
+        const full = taken.has(key) || hash(key) % 100 < 10 + guests * 3;
+        slots.push({ time, available: !full });
+      }
+      const label = S >= 16 * 60 ? 'Dinner' : (dow === 0 || dow === 6) ? 'Brunch & lunch' : 'Lunch';
+      return { label, slots };
+    }).filter((g) => g.slots.length);
+  }
+  const hasAvailability = (room, ymd, guests) => slotGroups(room, ymd, guests).some((g) => g.slots.some((s) => s.available));
+
+  function findAvailable(room, fromYmd, guests, includeStart) {
+    const max = addDays(venueNow().ymd, BOOK_AHEAD);
+    for (let i = includeStart ? 0 : 1; i <= BOOK_AHEAD; i++) {
+      const d = addDays(fromYmd, i);
+      if (d > max) break;
+      if (hasAvailability(room, d, guests)) return d;
+    }
+    return null;
+  }
+
+  function slotMessage(html) { slotsBox.innerHTML = `<p class="slot-msg">${html}</p>`; }
+
+  function renderSlots() {
+    const room = getRoom(), ymd = F.date.value, guests = Number(F.guests.value);
+    const prev = getTime();
+    const now = venueNow();
+    const max = addDays(now.ymd, BOOK_AHEAD);
+    if (!ymd) return slotMessage('Choose a date to see available times.');
+    if (ymd < now.ymd || ymd > max) return slotMessage(`We take bookings from today until ${fmtShort(max)}.`);
+
+    const groups = slotGroups(room, ymd, guests);
+    const any = groups.some((g) => g.slots.some((s) => s.available));
+    if (!any) {
+      const dow = dowOf(ymd);
+      let reason;
+      if (!windowsFor(room, dow).length) reason = `${ROOMS[room]} is closed on ${DAYS[dow]}s.`;
+      else if (!groups.length) reason = `Service has finished for today in ${ROOMS[room].replace('The ', 'the ')}.`;
+      else reason = `${ROOMS[room]} is fully booked for a party of ${guests} on ${fmtShort(ymd)}.`;
+      const next = findAvailable(room, ymd, guests, false);
+      return slotMessage(reason + (next ? ` <button type="button" class="text-link" data-goto="${next}">Next available: ${fmtShort(next)} →</button>` : ''));
+    }
+
+    slotsBox.innerHTML = groups.map((g) => `
+      <div class="slot-group">
+        <p class="slot-label">${g.label}</p>
+        <div class="slot-grid">${g.slots.map((s) => `
+          <label class="slot"><input class="sr-only" type="radio" name="time" value="${s.time}"${s.available ? '' : ' disabled'}${s.available && s.time === prev ? ' checked' : ''}><span>${s.time}${s.available ? '' : '<span class="sr-only"> (fully booked)</span>'}</span></label>`).join('')}
+        </div>
+      </div>`).join('');
+  }
+
+  function updateRoomNote() {
+    $('#room-note').textContent = getRoom() === 'dining'
+      ? 'Seven-course tasting menu, £145 per guest. Please allow around three hours.'
+      : 'À la carte lunch, dinner and weekend brunch. Please allow around 90 minutes.';
+  }
+
+  function initDate() {
+    const now = venueNow();
+    F.date.min = now.ymd;
+    F.date.max = addDays(now.ymd, BOOK_AHEAD);
+    F.date.value = findAvailable(getRoom(), now.ymd, Number(F.guests.value), true) || now.ymd;
+  }
+
+  function setRoom(room) {
+    const input = form.querySelector(`input[name="room"][value="${room}"]`);
+    if (!input) return;
+    input.checked = true;
+    onRoomChange();
+  }
+  function onRoomChange() {
+    updateRoomNote();
+    renderSlots();
+    if (attempted) validate();
+  }
+
+  function goToReserve() {
+    const showingConfirm = !confirmEl.hidden;
+    $('#reserve').scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    setTimeout(() => (showingConfirm ? confirmEl : F.date).focus({ preventScroll: true }), reducedMotion ? 0 : 600);
+  }
+
+  $$('[data-reserve-room]').forEach((a) => a.addEventListener('click', () => {
+    if (form.hidden) resetBooking(false);
+    setRoom(a.dataset.reserveRoom);
+  }));
+
+  form.addEventListener('change', (e) => {
+    const n = e.target.name;
+    if (n === 'room') onRoomChange();
+    else if (n === 'date' || n === 'guests') { renderSlots(); if (attempted) validate(); }
+    else if (n === 'time' && attempted) validate();
+  });
+  form.addEventListener('input', (e) => {
+    if (attempted && ['guestName', 'email', 'phone'].includes(e.target.name)) validate();
+  });
+  slotsBox.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-goto]');
+    if (!b) return;
+    F.date.value = b.dataset.goto;
+    renderSlots();
+    if (attempted) validate();
+    form.querySelector('input[name="time"]:not(:disabled)')?.focus();
+  });
+
+  function setError(name, msg) {
+    $('#err-' + name).textContent = msg;
+    if (name !== 'time') F[name].setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+  function validate() {
+    const now = venueNow();
+    const max = addDays(now.ymd, BOOK_AHEAD);
+    const checks = {
+      date: () => {
+        const v = F.date.value;
+        if (!v) return 'Please choose a date.';
+        if (v < now.ymd || v > max) return `Please choose a date between today and ${fmtShort(max)}.`;
+        return '';
+      },
+      time: () => (getTime() ? '' : 'Please choose an available time.'),
+      guestName: () => (F.guestName.value.trim().length >= 2 ? '' : 'Please enter your full name.'),
+      email: () => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(F.email.value.trim()) ? '' : 'Please enter a valid email address.'),
+      phone: () => (F.phone.value.replace(/\D/g, '').length >= 7 ? '' : 'Please enter a phone number we can reach you on.')
+    };
+    let first = null;
+    Object.keys(checks).forEach((k) => {
+      const msg = checks[k]();
+      setError(k, msg);
+      if (msg && !first) first = k;
+    });
+    return first;
+  }
+
+  function makeRef() {
+    const A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    const buf = new Uint32Array(6);
+    (window.crypto || window.msCrypto).getRandomValues(buf);
+    return 'AUR-' + Array.from(buf, (n) => A[n % A.length]).join('');
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    attempted = true;
+    const bad = validate();
+    if (bad) {
+      const target = bad === 'time'
+        ? (form.querySelector('input[name="time"]:not(:disabled)') || F.date)
+        : F[bad];
+      target.focus();
+      return;
+    }
+    const btn = $('#submit-btn');
+    btn.disabled = true;
+    btn.classList.add('is-loading');
+    btn.textContent = 'Confirming';
+    setTimeout(() => {
+      const booking = {
+        ref: makeRef(), room: getRoom(), date: F.date.value, time: getTime(),
+        guests: Number(F.guests.value), name: F.guestName.value.trim(),
+        email: F.email.value.trim(), phone: F.phone.value.trim(),
+        occasion: F.occasion.value, notes: F.notes.value.trim()
+      };
+      addBooked(`${booking.room}|${booking.date}|${booking.time}`);
+      showConfirmation(booking);
+      btn.disabled = false;
+      btn.classList.remove('is-loading');
+      btn.textContent = 'Confirm reservation';
+    }, 650);
+  });
+
+  function showConfirmation(b) {
+    lastBooking = b;
+    $('#c-name').textContent = b.name.split(/\s+/)[0];
+    $('#c-ref').textContent = b.ref;
+    $('#c-room').textContent = ROOMS[b.room];
+    $('#c-date').textContent = fmtLong(b.date);
+    $('#c-time').textContent = b.time;
+    $('#c-guests').textContent = b.guests === 1 ? '1 guest' : `${b.guests} guests`;
+    $('#c-occasion').textContent = b.occasion;
+    $('#c-occasion').hidden = $('#c-occasion-dt').hidden = !b.occasion;
+    $('#c-phone').textContent = b.phone;
+    form.hidden = true;
+    confirmEl.hidden = false;
+    confirmEl.focus({ preventScroll: true });
+    confirmEl.closest('.form-card').scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+  }
+
+  function resetBooking(focus) {
+    form.reset();
+    attempted = false;
+    ['date', 'time', 'guestName', 'email', 'phone'].forEach((k) => setError(k, ''));
+    initDate();
+    updateRoomNote();
+    renderSlots();
+    form.hidden = false;
+    confirmEl.hidden = true;
+    if (focus) F.date.focus();
+  }
+  $('#new-booking').addEventListener('click', () => resetBooking(true));
+
+  $('#add-cal').addEventListener('click', () => {
+    const b = lastBooking;
+    if (!b) return;
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    const ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//AURELIA//Reservations//EN', 'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      `UID:${b.ref}@aurelia`,
+      `DTSTAMP:${stamp}`,
+      `DTSTART;TZID=${TZ}:${b.date.replace(/-/g, '')}T${b.time.replace(':', '')}00`,
+      `DURATION:${b.room === 'dining' ? 'PT3H' : 'PT1H30M'}`,
+      `SUMMARY:Table at AURELIA — ${ROOMS[b.room]}`,
+      'LOCATION:14 Marlowe Row\\, Clerkenwell\\, London EC1V 4PQ',
+      `DESCRIPTION:Reference ${b.ref}\\n${b.guests} guest${b.guests > 1 ? 's' : ''}\\nReservations: +44 20 7946 0321`,
+      'END:VEVENT', 'END:VCALENDAR'
+    ].join('\r\n');
+    const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url; a.download = `aurelia-${b.ref}.ics`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+  /* =========================================================
+     Header, navigation, reveal, footer
+     ========================================================= */
+  const header = $('#site-header');
+  const toggle = $('.menu-toggle');
+  const mobileNav = $('#mobile-nav');
+
+  function syncHeader() { header.classList.toggle('is-solid', window.scrollY > 40 || !mobileNav.hidden); }
+  function setMobileNav(open) {
+    mobileNav.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    syncHeader();
+  }
+  toggle.addEventListener('click', () => setMobileNav(mobileNav.hidden));
+  mobileNav.addEventListener('click', (e) => { if (e.target.closest('a')) setMobileNav(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !mobileNav.hidden) { setMobileNav(false); toggle.focus(); }
+  });
+  window.addEventListener('resize', () => { if (window.innerWidth > 1100 && !mobileNav.hidden) setMobileNav(false); });
+  window.addEventListener('scroll', syncHeader, { passive: true });
+
+  if ('IntersectionObserver' in window) {
+    const links = $$('.nav-links a');
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        links.forEach((l) => l.classList.toggle('is-active', l.getAttribute('href') === '#' + en.target.id));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    links.forEach((l) => { const s = $(l.getAttribute('href')); if (s) spy.observe(s); });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    $$('.reveal').forEach((el) => io.observe(el));
+  } else {
+    $$('.reveal').forEach((el) => el.classList.add('is-in'));
+  }
+
+  $('#nl-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = $('#nl-email');
+    const msg = $('#nl-msg');
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim());
+    msg.classList.toggle('is-error', !ok);
+    msg.textContent = ok ? 'Thank you. You’ll hear from us when the next season’s menu is ready.' : 'Please enter a valid email address.';
+    if (ok) input.value = ''; else input.focus();
+  });
+
+  $('#year').textContent = new Date().getFullYear();
+
+  /* =========================================================
+     Boot
+     ========================================================= */
+  renderHours();
+  updateStatus();
+  renderMenu();
+  initDate();
+  updateRoomNote();
+  renderSlots();
+  syncHeader();
+
+  setInterval(() => {
+    updateStatus();
+    if (!form.hidden && F.date.value === venueNow().ymd) renderSlots();
+  }, 30000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) updateStatus(); });
+})();
+</script>
+</body>
+</html>
