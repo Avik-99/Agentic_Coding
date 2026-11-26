@@ -20,12 +20,21 @@
   --color-plate: #f3f2ef;
   --color-paper: #fff;
   --color-paper-warm: #fef6ea;
+  /* Solid text colors (not alpha): semi-transparent text loses ClearType
+     sub-pixel rendering on Windows and looks blurry. */
   --color-text-strong: #0a0a0a;
-  --color-text: #0a0a0ad9;
-  --color-text-muted: #0a0a0a99;
-  --color-text-faint: #0a0a0a6b;
+  --color-text: #1f1f1e;
+  --color-text-muted: #555452;
+  --color-text-faint: #7d7c78;
   --color-link-underline: #0a0a0a4d;
   --color-rule: #0a0a0a1f;
+
+  /* surface details that change per theme */
+  --stud-core: #0000002e;
+  --stud-hi: #fffffff2;
+  --stud-lo: #0000003d;
+  --screw-face: radial-gradient(circle at 35% 30%, #fff 0 20%, #d6d5d0 60%, #a9a8a3 100%);
+  --switch-off: var(--color-steel);
 
   /* type */
   --font-display: "Zalando Sans Expanded", "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -33,7 +42,7 @@
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
   --weight-display: 800;
   --weight-label: 700;
-  --weight-silk: 500;
+  --weight-silk: 600;
   --text-silk: .6875rem;
   --text-silk-sm: .59375rem;
   --tracking-display: -.05em;
@@ -66,8 +75,10 @@
 /* ---------- base ---------- */
 html {
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* default (sub-pixel) smoothing keeps glyphs crisp; no greyscale AA */
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -77,7 +88,10 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "cv11";
+  font-optical-sizing: auto;
+  font-kerning: normal;
   line-height: 1.625;
+  transition: background-color .25s ease, color .25s ease;
 }
 
 .grain,
@@ -129,7 +143,7 @@ a { color: inherit; text-decoration: inherit; }
   border-radius: 9999px;
   background:
     linear-gradient(45deg, transparent 44%, #0000004d 45% 55%, transparent 56%),
-    radial-gradient(circle at 35% 30%, #fff 0 20%, #d6d5d0 60%, #a9a8a3 100%);
+    var(--screw-face);
   box-shadow: inset 0 0 0 1px #00000026, 0 1px 0 #fffc;
   z-index: 2;
 }
@@ -167,9 +181,9 @@ a { color: inherit; text-decoration: inherit; }
   min-width: 0;
   background-color: var(--color-plate);
   background-image:
-    radial-gradient(circle calc(var(--spacing-pitch) * .27) at 50% 50%, #0000002e 0 88%, transparent 100%),
-    radial-gradient(circle calc(var(--spacing-pitch) * .29) at 54% 55%, #fffffff2 0 90%, transparent 100%),
-    radial-gradient(circle calc(var(--spacing-pitch) * .29) at 46% 45%, #0000003d 0 90%, transparent 100%);
+    radial-gradient(circle calc(var(--spacing-pitch) * .27) at 50% 50%, var(--stud-core) 0 88%, transparent 100%),
+    radial-gradient(circle calc(var(--spacing-pitch) * .29) at 54% 55%, var(--stud-hi) 0 90%, transparent 100%),
+    radial-gradient(circle calc(var(--spacing-pitch) * .29) at 46% 45%, var(--stud-lo) 0 90%, transparent 100%);
   background-size: var(--spacing-pitch) var(--spacing-pitch);
   background-position: 50%;
   background-repeat: round;
@@ -317,7 +331,7 @@ a:hover > .seat, .seat-link:hover .seat { background: var(--color-orange); color
   padding: 0;
   border: 0;
   border-radius: 9999px;
-  background: var(--color-steel);
+  background: var(--switch-off);
   box-shadow: inset 0 1px 2px #0006;
   cursor: pointer;
   transition: background-color .18s;
@@ -544,8 +558,72 @@ a:hover > .seat, .seat-link:hover .seat { background: var(--color-orange); color
 }
 .link:hover { text-decoration-color: var(--color-orange); }
 
+/* ---------- theme toggle ---------- */
+.theme-toggle {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.theme-toggle:hover { background: var(--color-orange); color: var(--color-on-orange); }
+.theme-toggle svg { transition: transform .38s cubic-bezier(.3, 1.5, .5, 1); }
+.theme-toggle:hover svg { transform: rotate(-25deg); }
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* smooth color swap when switching themes */
+.plate, .cell, .stat, .frame, .strip, .strip::after {
+  transition: background-color .25s ease, box-shadow .25s ease, border-color .25s ease, color .25s ease;
+}
+
+/* =========================================================
+   DARK THEME — same rack, powered down: charcoal plates,
+   light print, orange stays the single accent.
+   ========================================================= */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-ink: #f4f3f0;
+  --color-graphite: #3a3a3e;
+  --color-slate: #9a999f;
+  --color-steel: #4a4a4f;
+  --color-groove: #2b2b2f;
+  --color-body: #0c0c0d;
+  --color-plate: #17171a;
+  --color-paper: #101012;
+  --color-paper-warm: #221b15;
+  --color-muted: #a8a7a2;              /* Tailwind text-muted */
+
+  --color-text-strong: #f4f3f0;
+  --color-text: #dcdbd7;
+  --color-text-muted: #a8a7a2;
+  --color-text-faint: #77766f;
+  --color-link-underline: #f4f3f04d;
+  --color-rule: #ffffff1a;
+
+  --shadow-plate: inset 0 1px 0 #ffffff14, 0 1px 0 #00000066, 0 14px 28px -18px #000000d9;
+  --shadow-key: 0 0 0 2px #000000e6, inset 0 1px 0 #ffffff2e, inset 0 -2px 0 #00000066;
+  --shadow-key-pressed: 0 0 0 2px #000000e6, inset 0 2px 3px #00000099;
+  --shadow-recess: inset 0 1px 3px #000000b3, 0 1px 0 #ffffff0d;
+
+  --stud-core: #000000b3;
+  --stud-hi: #ffffff1f;
+  --stud-lo: #00000080;
+  --screw-face: radial-gradient(circle at 35% 30%, #8d8c88 0 20%, #4b4b4e 60%, #2a2a2c 100%);
+  --switch-off: #3a3a3e;
+}
+
+[data-theme="dark"] .frame img { filter: saturate(.9) brightness(.92) contrast(1.05); }
+[data-theme="dark"] .grain,
+[data-theme="dark"] .plate { background-blend-mode: overlay; }
+
 /* ---------- reveal on scroll ---------- */
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .2, 1); }
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .2, 1),
+              background-color .25s ease, box-shadow .25s ease;
+}
 .reveal.is-visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {

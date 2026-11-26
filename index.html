@@ -3,7 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=1280">
-  <meta name="theme-color" content="#fa5b01">
+  <meta name="theme-color" content="#e2e1dd">
+
+  <!-- Apply saved / system theme before first paint (no flash) -->
+  <script>
+    (() => {
+      let theme;
+      try { theme = localStorage.getItem("theme"); } catch {}
+      if (theme !== "light" && theme !== "dark") {
+        theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
   <title>Avik — .NET / C# Developer</title>
   <meta name="description" content="Avik — .NET / C# developer building web apps with ASP.NET and exploring agentic AI.">
   <link rel="icon" href="assets/avik.png">
@@ -29,8 +41,8 @@
       --color-plate: #f3f2ef;
       --color-paper: #ffffff;
       --color-paper-warm: #fef6ea;
-      --color-muted: #0a0a0a99;
-      --color-faint: #0a0a0a6b;
+      --color-muted: #555452;
+      --color-faint: #7d7c78;
       --font-display: "Zalando Sans Expanded", "Inter Tight", "Inter", sans-serif;
       --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -50,7 +62,9 @@
     <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.83v1.5h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.13v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4v-11Z"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24" fill="currentColor"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.19L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.17h1.7L7.4 4.74H5.58l11.09 14.43Z"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
-    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
+    <symbol id="i-copy"viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
   </svg>
 
   <main id="top" class="rack pt-5 pb-5">
@@ -70,7 +84,11 @@
           <a class="nav-link silk" href="#about">About</a>
           <a class="nav-link silk" href="#experience">Experience</a>
           <a class="nav-link silk" href="#contact">Contact</a>
-          <a class="key ml-3" href="https://github.com/Avik-99" target="_blank" rel="noopener">
+          <button class="seat seat--lg theme-toggle ml-2" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Toggle dark mode">
+            <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+            <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          </button>
+          <a class="key" href="https://github.com/Avik-99" target="_blank" rel="noopener">
             <svg aria-hidden="true"><use href="#i-github"/></svg> GitHub
           </a>
         </nav>
@@ -121,7 +139,7 @@
         <figure class="m-0 justify-self-center w-full max-w-[29rem]">
           <div class="frame">
             <img src="assets/avik.png" alt="Portrait of Avik wearing sunglasses and a striped shirt" class="aspect-[4/5]" style="object-position:50% 35%">
-            <span class="absolute top-6 right-6 cell !py-1.5 !px-2.5 !bg-[#f3f2efe6]"><span class="dot"></span>REC</span>
+            <span class="absolute top-6 right-6 cell !py-1.5 !px-2.5 !bg-plate/90"><span class="dot"></span>REC</span>
           </div>
           <figcaption class="mt-4 flex items-center justify-between">
             <span class="silk"><span class="silk--strong">Fig. 1</span> — Avik, on a sunny day</span>

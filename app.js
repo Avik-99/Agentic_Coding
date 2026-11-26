@@ -4,6 +4,29 @@
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- light / dark theme ---------- */
+  const root = document.documentElement;
+  const themeBtn = $("[data-theme-toggle]");
+  const themeMeta = $('meta[name="theme-color"]');
+  const applyTheme = (theme, save) => {
+    root.dataset.theme = theme;
+    themeMeta?.setAttribute("content", theme === "dark" ? "#0c0c0d" : "#e2e1dd");
+    themeBtn?.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+    if (save) {
+      try { localStorage.setItem("theme", theme); } catch {}
+    }
+  };
+  applyTheme(root.dataset.theme === "dark" ? "dark" : "light", false);
+  themeBtn?.addEventListener("click", () => {
+    applyTheme(root.dataset.theme === "dark" ? "light" : "dark", true);
+  });
+  // follow the OS setting until the visitor picks a theme themselves
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    let saved = null;
+    try { saved = localStorage.getItem("theme"); } catch {}
+    if (!saved) applyTheme(e.matches ? "dark" : "light", false);
+  });
+
   /* ---------- live local clock ---------- */
   const clocks = $$("[data-clock]");
   const pad = (n) => String(n).padStart(2, "0");
