@@ -9,18 +9,18 @@
 .field {
   display: block;
   width: 100%;
-  background: #0e1f3d;
-  border: 1px solid #25406b;
+  background: #0f2a1c;
+  border: 1px solid #24503a;
   border-radius: 0.5rem;
   padding: 0.5rem 0.65rem;
   font-size: 0.875rem;
-  color: #e6edf7;
+  color: #e8f3ec;
   font-weight: 400;
 }
 .field:focus {
-  outline: 2px solid #3cc4ae;
+  outline: 2px solid #a6ecbb;
   outline-offset: 1px;
-  border-color: #3cc4ae;
+  border-color: #a6ecbb;
 }
 .field.invalid { border-color: #f07a6a; }
 
@@ -34,12 +34,147 @@
 }
 
 button:focus-visible {
-  outline: 2px solid #3cc4ae;
+  outline: 2px solid #a6ecbb;
   outline-offset: 2px;
 }
 
-/* Modal */
-dialog::backdrop { background: rgba(3, 8, 20, 0.65); }
+/* Buttons: one rounded primary style, used everywhere */
+.btn-primary {
+  background: #8fe3a8;
+  color: #0c2318;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+.btn-primary:hover { background: #74d391; }
+
+.btn-ghost {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 1px solid #24503a;
+  border-radius: 999px;
+}
+.btn-ghost:hover { background: #0c2318; }
+
+.link-btn {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #a6ecbb;
+  border-radius: 0.35rem;
+}
+.link-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Month stepper */
+.step-btn {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  line-height: 1;
+  border: 1px solid #24503a;
+  border-radius: 999px;
+  color: #e8f3ec;
+}
+.step-btn:hover:not(:disabled) { background: #13301f; }
+.step-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* "Filtered" badge */
+.chip {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: #1d4a31;
+  color: #a6ecbb;
+}
+
+/* Stat tiles: one big number, one short caption */
+.tile {
+  background: #13301f;
+  border: 1px solid #24503a;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  min-width: 0;
+}
+.tile-label { font-size: 0.75rem; color: #9dbcaa; }
+.tile-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.tile-note { font-size: 0.75rem; color: #9dbcaa; margin-top: 0.25rem; }
+@media (max-width: 400px) { .tile-value { font-size: 1.25rem; } }
+
+/* Category icon tile: outline icon on a tint of the category colour */
+.icon-tile {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 0.6rem;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 18%, transparent);
+}
+.icon-tile.sm { width: 1.9rem; height: 1.9rem; border-radius: 0.5rem; }
+.icon-tile svg { width: 1.05rem; height: 1.05rem; stroke-width: 1.9; }
+.icon-tile.sm svg { width: 0.95rem; height: 0.95rem; }
+
+/* Progress bars (budgets, goals) */
+.bar {
+  height: 0.45rem;
+  background: #0c2318;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.4s ease;
+}
+
+/* Empty state: 3 steps */
+.steps {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 20rem;
+  margin: 1.25rem auto;
+  text-align: left;
+}
+.steps li { display: flex; align-items: center; gap: 0.75rem; color: #e8f3ec; }
+.step-num {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid #24503a;
+  color: #a6ecbb;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Dialogs */
+.dlg {
+  border-radius: 1rem;
+  background: #13301f;
+  color: #e8f3ec;
+  padding: 0;
+  width: calc(100% - 2rem);
+  max-width: 28rem;
+  border: 1px solid #24503a;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+}
+dialog::backdrop { background: rgba(2, 12, 6, 0.65); }
 dialog[open] { animation: pop 0.15s ease-out; margin: auto; }
 @keyframes pop {
   from { opacity: 0; transform: translateY(8px) scale(0.98); }
@@ -52,14 +187,15 @@ dialog[open] { animation: pop 0.15s ease-out; margin: auto; }
   left: 50%;
   bottom: 1.5rem;
   transform: translate(-50%, 150%);
-  background: #e6edf7;
-  color: #0b1a33;
+  background: #e8f3ec;
+  color: #0c2318;
   font-size: 0.875rem;
   padding: 0.7rem 1rem;
   border-radius: 0.6rem;
   transition: transform 0.2s ease, visibility 0.2s;
   z-index: 50;
-  white-space: nowrap;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
   visibility: hidden; /* keeps the hidden Undo button out of the tab order */
 }
 .toast.show { transform: translate(-50%, 0); visibility: visible; }
@@ -67,14 +203,16 @@ dialog[open] { animation: pop 0.15s ease-out; margin: auto; }
 /* Row action buttons */
 .row-btn {
   font-size: 0.75rem;
-  color: #9aabc7;
+  color: #9dbcaa;
   padding: 0.25rem 0.4rem;
   border-radius: 0.35rem;
+  white-space: nowrap;
 }
-.row-btn:hover { background: #0b1a33; color: #e6edf7; }
+.row-btn:hover { background: #0c2318; color: #e8f3ec; }
 .row-btn.confirm { background: #c0392b; color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
   dialog[open] { animation: none; }
   .toast { transition: none; }
+  .bar > span { transition: none; }
 }

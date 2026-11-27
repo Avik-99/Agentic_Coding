@@ -14,12 +14,12 @@
         extend: {
           fontFamily: { sans: ['Figtree', 'system-ui', 'sans-serif'] },
           colors: {
-            paper: '#0b1a33',
-            card: '#12264a',
-            ink: '#e6edf7',
-            mute: '#9aabc7',
-            line: '#25406b',
-            accent: { DEFAULT: '#14806f', dark: '#0f6b5c', soft: '#173f4f' },
+            paper: '#0c2318',
+            card: '#13301f',
+            ink: '#e8f3ec',
+            mute: '#9dbcaa',
+            line: '#24503a',
+            accent: { DEFAULT: '#8fe3a8', dark: '#74d391', soft: '#1d4a31', bright: '#a6ecbb' },
             danger: '#f07a6a'
           }
         }
@@ -31,52 +31,116 @@
 <body class="bg-paper text-ink font-sans antialiased">
 
   <header class="border-b border-line">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between gap-4">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
       <div>
         <h1 class="text-xl font-bold tracking-tight">Expense Tracker</h1>
-        <p class="text-sm text-mute"><span id="monthLabel"></span>: <span id="monthTotal" class="money font-semibold text-ink"></span></p>
+        <p id="trackingSince" class="text-xs text-mute"></p>
       </div>
-      <button id="addBtn" class="bg-accent hover:bg-accent-dark text-white font-semibold text-sm px-4 py-2.5 rounded-lg transition-colors">
-        + Add expense
-      </button>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1" role="group" aria-label="Choose month">
+          <button id="prevMonth" class="step-btn" aria-label="Previous month">&lsaquo;</button>
+          <span id="monthLabel" class="text-sm font-semibold w-32 text-center" aria-live="polite"></span>
+          <button id="nextMonth" class="step-btn" aria-label="Next month">&rsaquo;</button>
+        </div>
+        <button id="addBtn" class="btn-primary">+ Add expense</button>
+      </div>
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
 
-    <!-- Summary -->
-    <section aria-label="Summary" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      <div class="bg-card border border-line rounded-xl p-4">
-        <p class="text-xs uppercase tracking-wide text-mute">Total spent</p>
-        <p id="sumTotal" class="money text-2xl font-bold mt-1">৳0.00</p>
-        <p id="sumCount" class="text-xs text-mute mt-1"></p>
+    <!-- This month, in plain words -->
+    <section aria-label="This month">
+      <p id="monthHeadline" class="text-2xl sm:text-3xl font-bold tracking-tight leading-snug"></p>
+      <p id="monthSub" class="text-sm text-mute mt-2"></p>
+    </section>
+
+    <!-- Stat tiles (follow the filters) -->
+    <section aria-labelledby="overviewHeading">
+      <div class="flex items-center gap-2 mb-2">
+        <h2 id="overviewHeading" class="text-sm font-semibold">Overview</h2>
+        <span id="filteredChip" class="chip hidden">Filtered</span>
       </div>
-      <div class="bg-card border border-line rounded-xl p-4">
-        <p class="text-xs uppercase tracking-wide text-mute">Average per category</p>
-        <p id="sumAvg" class="money text-2xl font-bold mt-1">৳0.00</p>
-        <p id="sumAvgNote" class="text-xs text-mute mt-1"></p>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="tile">
+          <p class="tile-label">Total spent</p>
+          <p id="sumTotal" class="tile-value money">৳0.00</p>
+          <p id="sumCount" class="tile-note"></p>
+        </div>
+        <div class="tile">
+          <p class="tile-label">Daily average</p>
+          <p id="sumDaily" class="tile-value money">৳0.00</p>
+          <p id="sumDailyNote" class="tile-note"></p>
+        </div>
+        <div class="tile">
+          <p class="tile-label">Average per category</p>
+          <p id="sumAvg" class="tile-value money">৳0.00</p>
+          <p id="sumAvgNote" class="tile-note"></p>
+        </div>
+        <div class="tile">
+          <p class="tile-label">Top category</p>
+          <p id="sumTop" class="tile-value">None</p>
+          <p id="sumTopNote" class="tile-note money"></p>
+        </div>
       </div>
-      <div class="bg-card border border-line rounded-xl p-4">
-        <p class="text-xs uppercase tracking-wide text-mute">Top category</p>
-        <p id="sumTop" class="text-2xl font-bold mt-1">None</p>
-        <p id="sumTopNote" class="money text-xs text-mute mt-1"></p>
+    </section>
+
+    <!-- Budgets + goals -->
+    <section aria-label="Budgets and savings goals" class="grid grid-cols-1 md:grid-cols-5 gap-3">
+      <div class="md:col-span-3 bg-card border border-line rounded-xl p-4">
+        <div class="flex items-start justify-between gap-3 mb-4">
+          <div>
+            <h2 class="text-sm font-semibold">Budgets <span id="budgetMonth" class="font-normal text-mute"></span></h2>
+            <p id="budgetNote" class="money text-xs text-mute mt-0.5"></p>
+          </div>
+          <button id="editBudgetsBtn" class="link-btn shrink-0">Edit budgets</button>
+        </div>
+        <ul id="budgetList" class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4"></ul>
+        <div id="budgetEmpty" class="hidden text-sm text-mute py-6 text-center">
+          <p>No budgets yet. Decide how much each category gets per month.</p>
+          <button id="budgetEmptyBtn" class="link-btn mt-2">Set a monthly budget</button>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 bg-card border border-line rounded-xl p-4">
+        <div class="flex items-start justify-between gap-3 mb-4">
+          <div>
+            <h2 class="text-sm font-semibold">Savings goals</h2>
+            <p id="goalNote" class="money text-xs text-mute mt-0.5"></p>
+          </div>
+          <button id="newGoalBtn" class="link-btn shrink-0">+ New goal</button>
+        </div>
+        <ul id="goalList" class="space-y-5"></ul>
+        <p id="goalEmpty" class="hidden text-sm text-mute py-6 text-center">No goals yet. Add one for a trip, a new phone or Eid.</p>
       </div>
     </section>
 
     <!-- Charts -->
-    <section aria-label="Charts" class="grid grid-cols-1 md:grid-cols-5 gap-3">
-      <div class="md:col-span-2 bg-card border border-line rounded-xl p-4">
-        <h2 class="text-sm font-semibold mb-3">By category</h2>
-        <div class="relative h-56">
-          <canvas id="pieChart" aria-label="Spending by category"></canvas>
-          <p id="pieEmpty" class="hidden absolute inset-0 grid place-items-center text-sm text-mute">No data to chart</p>
+    <section aria-label="Charts" class="space-y-3">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+        <div class="md:col-span-2 bg-card border border-line rounded-xl p-4">
+          <h2 class="text-sm font-semibold mb-3">By category</h2>
+          <div class="relative h-56">
+            <canvas id="pieChart" aria-label="Spending by category"></canvas>
+            <p id="pieEmpty" class="hidden absolute inset-0 grid place-items-center text-sm text-mute">No data to chart</p>
+          </div>
+        </div>
+        <div class="md:col-span-3 bg-card border border-line rounded-xl p-4">
+          <h2 class="text-sm font-semibold mb-3">Spending over time <span id="barMode" class="font-normal text-mute"></span></h2>
+          <div class="relative h-56">
+            <canvas id="barChart" aria-label="Spending over time"></canvas>
+            <p id="barEmpty" class="hidden absolute inset-0 grid place-items-center text-sm text-mute">No data to chart</p>
+          </div>
         </div>
       </div>
-      <div class="md:col-span-3 bg-card border border-line rounded-xl p-4">
-        <h2 class="text-sm font-semibold mb-3">Spending over time <span id="barMode" class="font-normal text-mute"></span></h2>
-        <div class="relative h-56">
-          <canvas id="barChart" aria-label="Spending over time"></canvas>
-          <p id="barEmpty" class="hidden absolute inset-0 grid place-items-center text-sm text-mute">No data to chart</p>
+      <div class="bg-card border border-line rounded-xl p-4">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-3">
+          <h2 class="text-sm font-semibold">Monthly average by category</h2>
+          <p id="avgNote" class="text-xs text-mute"></p>
+        </div>
+        <div class="relative h-64">
+          <canvas id="avgChart" aria-label="Average monthly spending per category compared with budget"></canvas>
+          <p id="avgEmpty" class="hidden absolute inset-0 grid place-items-center text-sm text-mute">No data to chart</p>
         </div>
       </div>
     </section>
@@ -110,16 +174,16 @@
         <button id="clearAll" class="text-xs text-mute hover:text-danger underline underline-offset-2">Clear all data</button>
       </div>
       <ul id="list" class="bg-card border border-line rounded-xl divide-y divide-line overflow-hidden"></ul>
-      <p id="empty" class="hidden bg-card border border-line rounded-xl p-8 text-center text-sm text-mute"></p>
+      <div id="empty" class="hidden bg-card border border-line rounded-xl p-8 text-center text-sm text-mute"></div>
     </section>
   </main>
 
-  <!-- Add / edit modal -->
-  <dialog id="modal" class="rounded-2xl bg-card text-ink p-0 w-[calc(100%-2rem)] max-w-md border border-line shadow-xl">
+  <!-- Add / edit expense -->
+  <dialog id="modal" class="dlg">
     <form id="form" method="dialog" novalidate class="p-6 space-y-4">
       <div class="flex items-center justify-between">
         <h2 id="modalTitle" class="text-lg font-bold">Add expense</h2>
-        <button type="button" id="closeModal" class="text-mute hover:text-ink text-2xl leading-none" aria-label="Close">&times;</button>
+        <button type="button" data-close class="text-mute hover:text-ink text-2xl leading-none" aria-label="Close">&times;</button>
       </div>
 
       <label class="block text-sm font-medium">Date
@@ -142,8 +206,91 @@
       </label>
 
       <div class="flex justify-end gap-2 pt-2">
-        <button type="button" id="cancelBtn" class="text-sm font-medium border border-line rounded-lg px-4 py-2 hover:bg-paper">Cancel</button>
-        <button type="submit" id="saveBtn" class="text-sm font-semibold bg-accent hover:bg-accent-dark text-white rounded-lg px-4 py-2">Save</button>
+        <button type="button" data-close class="btn-ghost">Cancel</button>
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Budgets -->
+  <dialog id="budgetModal" class="dlg">
+    <form id="budgetForm" method="dialog" novalidate class="p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold">Monthly budgets</h2>
+        <button type="button" data-close class="text-mute hover:text-ink text-2xl leading-none" aria-label="Close">&times;</button>
+      </div>
+      <p class="text-sm text-mute">How much should each category get per month? Leave a box empty for no budget.</p>
+
+      <label class="block text-sm font-medium">Start from a template
+        <select id="budgetTemplate" class="field mt-1">
+          <option value="">Choose a template…</option>
+          <option value="Student">Student</option>
+          <option value="Single">Single, living alone</option>
+          <option value="Family">Family</option>
+        </select>
+      </label>
+
+      <div id="budgetInputs" class="grid grid-cols-2 gap-3"></div>
+      <span id="budgetErr" class="err"></span>
+
+      <div class="flex items-center justify-between gap-2 pt-1">
+        <p class="text-sm text-mute">Total <span id="budgetSum" class="money font-semibold text-ink"></span></p>
+        <div class="flex gap-2">
+          <button type="button" data-close class="btn-ghost">Cancel</button>
+          <button type="submit" class="btn-primary">Save budgets</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Savings goal -->
+  <dialog id="goalModal" class="dlg">
+    <form id="goalForm" method="dialog" novalidate class="p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 id="goalTitle" class="text-lg font-bold">New goal</h2>
+        <button type="button" data-close class="text-mute hover:text-ink text-2xl leading-none" aria-label="Close">&times;</button>
+      </div>
+
+      <label class="block text-sm font-medium">What are you saving for?
+        <input id="goalName" type="text" maxlength="40" placeholder="e.g. Eid shopping" required class="field mt-1">
+        <span class="err" data-for="goalName"></span>
+      </label>
+
+      <div class="grid grid-cols-2 gap-3">
+        <label class="block text-sm font-medium">Target (৳)
+          <input id="goalTarget" type="number" min="0" step="0.01" inputmode="decimal" placeholder="10000" required class="field mt-1">
+          <span class="err" data-for="goalTarget"></span>
+        </label>
+        <label class="block text-sm font-medium">Saved so far (৳)
+          <input id="goalSaved" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0" class="field mt-1">
+          <span class="err" data-for="goalSaved"></span>
+        </label>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" data-close class="btn-ghost">Cancel</button>
+        <button type="submit" class="btn-primary">Save goal</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Add money to a goal -->
+  <dialog id="fundModal" class="dlg">
+    <form id="fundForm" method="dialog" novalidate class="p-6 space-y-4">
+      <div class="flex items-center justify-between gap-3">
+        <h2 id="fundTitle" class="text-lg font-bold truncate">Add money</h2>
+        <button type="button" data-close class="text-mute hover:text-ink text-2xl leading-none" aria-label="Close">&times;</button>
+      </div>
+      <p id="fundNote" class="money text-sm text-mute"></p>
+
+      <label class="block text-sm font-medium">Amount to add (৳)
+        <input id="fundAmount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00" required class="field mt-1">
+        <span class="err" data-for="fundAmount"></span>
+      </label>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" data-close class="btn-ghost">Cancel</button>
+        <button type="submit" class="btn-primary">Add money</button>
       </div>
     </form>
   </dialog>
@@ -155,6 +302,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

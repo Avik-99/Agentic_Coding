@@ -85,3 +85,21 @@ Use Chart.js from CDN (small, reliable). Colours come from the same category pal
 - **Currency symbol**: default `$`. Say if you want something else (for example `৳`).
 - **Categories**: the fixed list above. Should users be able to add their own?
 - **Bar chart axis**: by month or by day? Default is by month, switching to by day when the filtered range is under about 45 days.
+
+
+## Design reference (YNAB)
+
+The layout and features follow [design-reference-ynab.md](design-reference-ynab.md): an outcome-first month summary, big-number stat tiles, monthly budgets per category, savings goals, outline category icons (Lucide) and a 3-step empty state.
+
+Extra data, each stored under its own `localStorage` key:
+
+```js
+// expense-tracker-budgets-v1: monthly amount per category, applied to every month
+{ Food: 8000, Transport: 2500, ... }
+
+// expense-tracker-goals-v1
+[{ id: string, name: string, target: number, saved: number }]
+```
+
+- The month picker in the header drives the summary sentence and the budgets.
+- The filters drive the stat tiles, the three charts and the list.
