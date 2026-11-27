@@ -11,9 +11,9 @@
     Food:      '#c2703d',
     Transport: '#4f7cac',
     Rent:      '#7a5c8e',
-    Bills:     '#b8963e',
+    Bills:     '#5fb0c0',
     Shopping:  '#b5586b',
-    Health:    '#4a8f6f',
+    Health:    '#7cc4a0',
     Fun:       '#d08a3c',
     Other:     '#8a857a'
   };
@@ -303,7 +303,7 @@
               <span class="money text-xs text-mute whitespace-nowrap"><span class="text-sm font-semibold text-ink">${moneyShort(spent)}</span> of ${moneyShort(limit)}</span>
             </div>
             <div class="bar mt-1.5" role="progressbar" aria-label="${c} budget used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct)}">
-              <span style="width:${pct}%;background:${over ? '#f07a6a' : catColor(c)}"></span>
+              <span style="width:${pct}%;background:${over ? '#ff7a6e' : catColor(c)}"></span>
             </div>
             <p class="money text-xs text-mute mt-1">${note}</p>
           </div>
@@ -401,8 +401,8 @@
   // ---------- Charts ----------
   const charts = {};
   Chart.defaults.font.family = 'Figtree, system-ui, sans-serif';
-  Chart.defaults.color = '#9dbcaa';
-  const GRID = '#1f4430';
+  Chart.defaults.color = '#a9bdb3';
+  const GRID = '#173f36';
   const tickMoney = (v) => CURRENCY + Number(v).toLocaleString('en-US');
 
   function drawChart(id, config) {
@@ -434,7 +434,7 @@
         datasets: [{
           data: catLabels.map((c) => byCat[c]),
           backgroundColor: catLabels.map(catColor),
-          borderColor: '#13301f',
+          borderColor: '#0c3029',
           borderWidth: 2
         }]
       },
@@ -469,7 +469,7 @@
         labels: keys.map((k) => byDay
           ? parseISO(k).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
           : parseISO(k + '-01').toLocaleDateString('en-GB', { month: 'short', year: '2-digit' })),
-        datasets: [{ data: keys.map((k) => buckets[k]), backgroundColor: '#6fd394', borderRadius: 4, maxBarThickness: 36 }]
+        datasets: [{ data: keys.map((k) => buckets[k]), backgroundColor: '#f1d29b', borderRadius: 4, maxBarThickness: 36 }]
       },
       options: {
         maintainAspectRatio: false,
@@ -512,7 +512,7 @@
           {
             label: 'Budget',
             data: avgCats.map((c) => budgets[c] || 0),
-            backgroundColor: 'rgba(157, 188, 170, 0.28)',
+            backgroundColor: 'rgba(169, 189, 179, 0.28)',
             borderRadius: 4,
             categoryPercentage: 0.75,
             barPercentage: 0.9

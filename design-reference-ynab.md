@@ -79,13 +79,13 @@ Our app is a single-page tool, not a sales site, so the patterns below are adapt
 
 | Token | Value | Role |
 |-------|-------|------|
-| `paper` | `#0c2318` | Page background (dark forest green) |
-| `card` | `#13301f` | Cards and panels |
-| `ink` | `#e8f3ec` | Primary text |
-| `mute` | `#9dbcaa` | Secondary text |
-| `line` | `#24503a` | Borders |
-| `accent` | `#8fe3a8` / focus `#a6ecbb` | The single accent |
-| `danger` | `#f07a6a` | Errors, over budget |
+| `paper` | `#06231e` | Page background (deep emerald) |
+| `card` | `#0c3029` | Cards and panels |
+| `ink` | `#f4efe4` | Primary text |
+| `mute` | `#a9bdb3` | Secondary text |
+| `line` | `#1c4a40` | Borders |
+| `accent` | `#f1d29b` / focus `#f6dfb3` | The single accent |
+| `danger` | `#ff7a6e` | Errors, over budget |
 | Font | Figtree 400–700 | One family, tabular numerals for money |
 
 YNAB's lesson is to use **one confident accent** and **warm, friendly** touches, not to change our colours.
